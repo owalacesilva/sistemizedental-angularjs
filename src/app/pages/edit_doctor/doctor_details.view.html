@@ -1,0 +1,88 @@
+<div class="panel">
+  <div class="panel-body">
+    <form name="form_profile" role="form" class="form" ng-submit="vm.onSubmit(form_profile.$valid)" novalidate>
+      <fieldset>
+        <legend>
+          Cadastro do Dentista
+        </legend>
+        <p>Informações pertinentes ao cadastro do Dentista</p>
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form_profile.first_name.$invalid && form_profile.$submitted }">
+                  <label for="first_name" class="control-label">Nome</label>
+                  <input type="text" class="form-control" name="first_name" id="first_name" ng-model="vm.doctor.first_name" required/>
+                  <div ng-messages="form_profile.first_name.$error" role="alert" class="help-block" ng-if="form_profile.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form_profile.last_name.$invalid && form_profile.$submitted }">
+                  <label for="last_name" class="control-label">Sobrenome</label>
+                  <input type="text" class="form-control" name="last_name" id="last_name" ng-model="vm.doctor.last_name"/>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form_profile.email.$invalid && form_profile.$submitted }">
+                  <label for="email" class="control-label">E-mail para contatos</label>
+                  <input type="email" class="form-control" name="email" id="email" ng-model="vm.doctor.email" required/>
+                  <div ng-messages="form_profile.email.$error" role="alert" class="help-block" ng-if="form_profile.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                    <span ng-message="email">E-mail inválido</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="phone_number" class="control-label">Telefone para contatos</label>
+                  <input type="text" class="form-control" name="phone_number" id="phone_number" ng-model="vm.doctor.phone_number" ui-mask="(99) ?99999-9999" model-view-value="true" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form_profile.gender.$invalid && form_profile.$submitted }">
+                  <label for="gender" class="control-label">Sexo</label>
+                  <select id="gender" name="gender" class="form-control" ng-model="vm.doctor.gender"
+                    ng-init="vm.doctor.gender = (vm.doctor.gender || vm.genders[0].id)" 
+                      ng-options="option.id as option.name for option in vm.genders" required></select>
+                  <div ng-messages="form_profile.gender.$error" role="alert" class="help-block" ng-if="form_profile.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group">
+                  <label for="birth_date" class="control-label">Data de Nascimento</label>
+                  <input type="text" class="form-control" id="birth_date" name="birth_date" ng-model="vm.doctor.birth_date" ui-mask="99/99/9999" model-view-value="true" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form_profile.blocked.$invalid && form_profile.$submitted }">
+                  <label for="phone_number" class="control-label">Situação</label><br/>
+                  <label class="radio-inline">
+                    <input type="radio" name="blocked" ng-model="vm.doctor.blocked" ng-value-true="false" ng-value="false"> Ativo
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="blocked" ng-model="vm.doctor.blocked" ng-value-false="true" ng-value="true"> Bloqueado
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <div class="form-group text-right">
+                  <button type="submit" class="btn btn-success ">Atualizar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

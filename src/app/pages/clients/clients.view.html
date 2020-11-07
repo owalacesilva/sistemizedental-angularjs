@@ -1,0 +1,37 @@
+<div class="p-h-xs p-v-xs">
+  <div class="panel">
+    <div class="panel-heading">
+      <h5 class="panel-title">Pacientes</h5>
+      <span>Lista de pacientes cadastrados na clínica</span>
+    </div>
+    <div class="panel-body">
+      <form role="form" class="form" accept-charset="utf-8" ng-submit="vm.filter()">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label class="control-label">Filtrar paciente</label>
+              <div class="input-group input-group-select">
+                <input type="text" class="form-control" id="search" name="search" ng-model="vm.search" />
+                <span class="input-group-addon">
+                  <select  class="form-control" id="type" name="type" ng-model="vm.type">
+                    <option ng-value="'first_name'">Nome</option>
+                    <option ng-value="'phone_number'">Telefone</option>
+                  </select>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label class="control-label">&nbsp;</label><br>
+              <button type="submit" class="btn btn-success">
+                <i class="fa fa-search"></i> Pesquisar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover display" cellspacing="0" width="100%"></table>
+    </div>
+  </div>
+</div>

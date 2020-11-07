@@ -1,0 +1,25 @@
+<div class="p-h-xs m-t-xs">
+  <uib-tabset active="vm.active" justified="false">
+    <uib-tab index="0" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-user-md fa-lg fa-fw" aria-hidden="true"></i> 
+        <span>Cadastro</span>
+      </uib-tab-heading>
+      <div ui-view="details"></div>
+    </uib-tab>
+    <uib-tab index="1" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-clock-o fa-lg fa-fw" aria-hidden="true"></i> 
+        <span class="hidden-sm hidden-xs">Expediente</span>
+      </uib-tab-heading>
+      <div ui-view="working_hours"></div>
+    </uib-tab>
+    <uib-tab index="2" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-unlock-alt fa-lg fa-fw" aria-hidden="true"></i> 
+        <span class="hidden-sm hidden-xs">Senha de acesso</span>
+      </uib-tab-heading>
+      <div ui-view="password"></div>
+    </uib-tab>
+  </uib-tabset>
+</div>

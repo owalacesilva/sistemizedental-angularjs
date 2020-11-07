@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>- placeholder-clinica</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="elementos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="--placeholder-clinica" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-69-Copy-2" fill="#8C8883" sketch:type="MSShapeGroup" x="0" y="0" width="100" height="100"></rect>
+            <rect id="Rectangle-41" fill="#FFFFFF" sketch:type="MSShapeGroup" x="13" y="20" width="74" height="80"></rect>
+            <rect id="Rectangle-42-Copy" fill="#BFBBB4" sketch:type="MSShapeGroup" x="33" y="73" width="34" height="27"></rect>
+            <path d="M33,75.9926339 C33,74.3398479 34.3433124,73 36.0023584,73 L63.9976416,73 C65.6557983,73 67,74.3389342 67,75.9926339 L67,100 L33,100 L33,75.9926339 Z M33,80.0068483 C33,78.3462119 34.3473186,77 36.0000191,77 L59.9999809,77 C61.6568457,77 63,78.3359915 63,80.0068483 L63,100 L33,100 L33,80.0068483 Z" id="Rectangle-42" opacity="0.7" fill="#8C8883" sketch:type="MSShapeGroup"></path>
+            <rect id="Rectangle-51" fill="#FFFFFF" sketch:type="MSShapeGroup" x="49" y="73" width="2" height="27"></rect>
+            <rect id="Rectangle-52" fill-opacity="0.699999988" fill="#8C8883" sketch:type="MSShapeGroup" x="35" y="8" width="28" height="28" rx="4"></rect>
+            <rect id="Rectangle-52-Copy" fill="#D8D3CC" sketch:type="MSShapeGroup" x="36" y="6" width="28" height="28" rx="4"></rect>
+            <g id="Rectangle-58-+-Rectangle-59" sketch:type="MSLayerGroup" transform="translate(19.000000, 39.000000)">
+                <rect id="Rectangle-42-Copy-4" fill="#C0BBB5" sketch:type="MSShapeGroup" x="0" y="0" width="26" height="26"></rect>
+                <path d="M23,14 L23,3 L0,3 L0,26 L23,26 L23,17 L11,17 L0,17 L0,14 L11,14 L23,14 Z M0,0 L26,0 L26,26 L0,26 L0,0 Z" id="Rectangle-56" opacity="0.7" fill="#8C8883" sketch:type="MSShapeGroup"></path>
+                <rect id="Rectangle-58" fill="#FFFFFF" sketch:type="MSShapeGroup" x="12" y="0" width="2" height="26"></rect>
+                <rect id="Rectangle-59" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="12" width="26" height="2"></rect>
+            </g>
+            <g id="Rectangle-58-+-Rectangle-59-Copy-2" sketch:type="MSLayerGroup" transform="translate(55.000000, 39.000000)">
+                <rect id="Rectangle-42-Copy-4" fill="#C0BBB5" sketch:type="MSShapeGroup" x="0" y="0" width="26" height="26"></rect>
+                <path d="M23,14 L23,3 L0,3 L0,26 L23,26 L23,17 L11,17 L0,17 L0,14 L11,14 L23,14 Z M0,0 L26,0 L26,26 L0,26 L0,0 Z" id="Rectangle-56" opacity="0.7" fill="#8C8883" sketch:type="MSShapeGroup"></path>
+                <rect id="Rectangle-58" fill="#FFFFFF" sketch:type="MSShapeGroup" x="12" y="0" width="2" height="26"></rect>
+                <rect id="Rectangle-59" fill="#FFFFFF" sketch:type="MSShapeGroup" x="0" y="12" width="26" height="2"></rect>
+            </g>
+            <path d="M53,17 L53,12 L47,12 L47,17 L42,17 L42,23 L47,23 L47,28 L53,28 L53,23 L58,23 L58,17 L53,17 Z" id="Rectangle-64" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+        </g>
+    </g>
+</svg>

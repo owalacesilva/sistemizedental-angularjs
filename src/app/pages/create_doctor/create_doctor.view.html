@@ -1,0 +1,106 @@
+<div class="p-h-xs p-v-xs">
+  <div class="panel">
+    <div class="panel-body">
+      <form name="form" role="form" class="form" ng-submit="vm.onSubmit(form.$valid)" novalidate>
+        <fieldset>
+          <legend>
+            <i class="fa fa-user-md fa-fw"></i> Cadastro do novo Dentista
+          </legend>
+          <p>Informações pertinentes ao cadastro do Dentista</p>
+          <div class="row">
+            <div class="col-md-6 col-lg-6">
+              <div class="row">
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.first_name.$invalid && form.$submitted }">
+                    <label for="first_name" class="control-label">Nome</label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" ng-model="vm.doctor.first_name" required/>
+                    <div ng-messages="form.first_name.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.last_name.$invalid && form.$submitted }">
+                    <label for="last_name" class="control-label">Sobrenome</label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" ng-model="vm.doctor.last_name"/>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.gender.$invalid && form.$submitted }">
+                    <label for="gender" class="control-label">Sexo</label>
+                    <select id="gender" name="gender" class="form-control" ng-model="vm.doctor.gender"
+                      ng-init="vm.doctor.gender = (vm.doctor.gender || vm.genders[0].id)" 
+                        ng-options="option.id as option.name for option in vm.genders" required></select>
+                    <div ng-messages="form.gender.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="birth_date" class="control-label">Data de Nascimento</label>
+                    <input type="text" class="form-control" id="birth_date" name="birth_date" ng-model="vm.doctor.birth_date" ui-mask="99/99/9999" model-view-value="true" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && form.$submitted }">
+                    <label for="email" class="control-label">E-mail para contatos</label>
+                    <input type="email" class="form-control" name="email" id="email" ng-model="vm.doctor.email" required/>
+                    <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                      <span ng-message="email">E-mail inválido</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.email_confirmation.$invalid && form.$submitted }">
+                    <label for="email_confirmation" class="control-label">Digite novamente o e-mail</label>
+                    <input type="email" class="form-control" name="email_confirmation" id="email_confirmation" ng-model="vm.doctor.email_confirmation" required/>
+                    <div ng-messages="form.email_confirmation.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                      <span ng-message="email_confirmation">E-mail inválido</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label for="phone_number" class="control-label">Telefone para contatos</label>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" ng-model="vm.doctor.phone_number" ui-mask="(99) ?99999-9999" model-view-value="true" required />
+                    <div ng-messages="form.phone_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && form.$submitted }">
+                    <label for="password" class="control-label">Senha de acesso</label>
+                    <div class="input-group">
+                      <input ng-model="vm.doctor.password" type="{{ vm.pwdVisible ? 'text' : 'password' }}" name="password" class="form-control" autocomplete="true" current-password required />
+                      <span class="input-group-addon">
+                        <a href="javascript:;" class="font-weight-bold none-decoration" ng-click="vm.pwdVisible = !vm.pwdVisible">
+                          {{ vm.pwdVisible ? 'Esconder' : 'Mostrar' }}
+                        </a>
+                      </span>
+                    </div>
+                    <div ng-messages="form.password.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group text-right">
+                <button type="submit" class="btn btn-success">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

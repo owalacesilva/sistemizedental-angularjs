@@ -1,0 +1,338 @@
+<form name="form_anamnesis" class="form-horizontal" ng-submit="vm.onSubmit(form_anamnesis)" novalidate>
+  <fieldset>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Aposentado</label>
+            <div class="col-sm-8">
+              <label class="radio-inline">
+                <input type="radio" name="aposentado" ng-model="vm.anamnesis.aposentado" value="Y"> Sim
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="aposentado" ng-model="vm.anamnesis.aposentado" value="N"> Não
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="alergia" class="col-sm-4 control-label">Alergia? Qual?</label>
+            <div class="col-sm-8">
+              <input type="text" id="alergia" name="alergia" ng-model="vm.anamnesis.alergia" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="mmi" class="col-sm-4 control-label">Jáz fez alguma cirurgia nos MMII? Qual?</label>
+            <div class="col-sm-8">
+              <input type="text" id="mmi" name="mmi" ng-model="vm.anamnesis.mmi" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="esportes" class="col-sm-4 control-label">Pratica algum esporte? Qual?</label>
+            <div class="col-sm-8">
+              <input type="text" id="esportes" name="esportes" ng-model="vm.anamnesis.esportes" class="form-control">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label for="medicamentos" class="col-sm-4 control-label">Faz uso de medicamento? Qual?</label>
+            <div class="col-sm-8">
+              <input type="text" id="medicamentos" name="medicamentos" ng-model="vm.anamnesis.medicamentos" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cirurgias" class="col-sm-4 control-label">Já fez cirurgia nos pés? Qual?</label>
+            <div class="col-sm-8">
+              <input type="text" id="cirurgias" name="cirurgias" ng-model="vm.anamnesis.cirurgias" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Outras Cirurgias?</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Gestante ou Lactante?</label>
+            <div class="col-sm-8">
+              <label class="radio-inline">
+                <input type="radio" name="gestante_lactante" ng-model="vm.anamnesis.gestante_lactante" value="G"> Gestante
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="gestante_lactante" ng-model="vm.anamnesis.gestante_lactante" value="L"> Lactante
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>        
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Sensibilidade á dor?</label>
+        <div class="col-sm-10">
+          <div class="container-fluid">
+            <label class="radio-inline">
+              <input type="radio" name="sensibilidade_dor" ng-model="vm.anamnesis.sensibilidade_dor" value="M"> Muita
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="sensibilidade_dor" ng-model="vm.anamnesis.sensibilidade_dor" value="S"> Suportável
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="sensibilidade_dor" ng-model="vm.anamnesis.sensibilidade_dor" value="P"> Pouca
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="sensibilidade_dor" ng-model="vm.anamnesis.sensibilidade_dor" value="N"> Nenhuma
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Possui</label>
+        <div class="col-sm-10">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-3">                  
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="pino_marca_passo" ng-model="vm.anamnesis.pino_marca_passo" ng-true-value="'1'" ng-false-value="'0'"> Pino ou marca-passo
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="pressao_alta" ng-model="vm.anamnesis.pressao_alta" ng-true-value="'1'" ng-false-value="'0'"> Pressão Alta
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="dcnt" ng-model="vm.anamnesis.dcnt" ng-true-value="'1'" ng-false-value="'0'"> DCNT
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="dm" ng-model="vm.anamnesis.dm" ng-true-value="'1'" ng-false-value="'0'"> DM
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="convulsoes" ng-model="vm.anamnesis.convulsoes" ng-true-value="'1'" ng-false-value="'0'"> Convulsoẽs
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="antecedentes_cancerigenos" ng-model="vm.anamnesis.antecedentes_cancerigenos" ng-true-value="'1'" ng-false-value="'0'"> Antecedentes cancerigenos
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-3">                  
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="hepatite" ng-model="vm.anamnesis.hepatite" ng-true-value="'1'" ng-false-value="'0'"> Hepatite
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="osteopatia" ng-model="vm.anamnesis.osteopatia" ng-true-value="'1'" ng-false-value="'0'"> Osteopatia
+                  </label>
+                </div>
+              </div>
+              <div class="col-lg-6">                  
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="problemas_circulatorios" ng-model="vm.anamnesis.problemas_circulatorios" ng-true-value="'1'" ng-false-value="'0'"> Problemas Circulatórios
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" name="cicatrizacao" ng-model="vm.anamnesis.cicatrizacao" ng-true-value="'1'" ng-false-value="'0'"> Problemas de cicatrização ou coagulação
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h3 class="col-sm-12 text-center">Aspectos das lâminas</h3>
+        <div class="col-sm-12 text-left">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="lamina_fissura" ng-model="vm.anamnesis.lamina_fissura" ng-true-value="'1'" ng-false-value="'0'"> Fissura
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="onicogrifose" ng-model="vm.anamnesis.onicogrifose" ng-true-value="'1'" ng-false-value="'0'"> Onicogrifose
+                </label>
+              </div>           
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="manchas" ng-model="vm.anamnesis.manchas" ng-true-value="'1'" ng-false-value="'0'"> Manchas
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="onicogriptose" ng-model="vm.anamnesis.onicogriptose" ng-true-value="'1'" ng-false-value="'0'"> Onicocriptose
+                </label>
+              </div>                 
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="fragil" ng-model="vm.anamnesis.fragil" ng-true-value="'1'" ng-false-value="'0'"> Frágil
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="onicopatia" ng-model="vm.anamnesis.onicopatia" ng-true-value="'1'" ng-false-value="'0'"> Onicopatia Diagnosticada
+                </label>
+              </div>                      
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="espessa" ng-model="vm.anamnesis.espessa" ng-true-value="'1'" ng-false-value="'0'"> Espessa
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="onicolise" ng-model="vm.anamnesis.onicolise" ng-true-value="'1'" ng-false-value="'0'"> Onicólise
+                </label>
+              </div>                              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h3 class="col-sm-12 text-center">Pele</h3>
+        <div class="col-sm-12 text-left">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="rosada" ng-model="vm.anamnesis.rosada" ng-true-value="'1'" ng-false-value="'0'"> Rosada
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="hiperqueratose" ng-model="vm.anamnesis.hiperqueratose" ng-true-value="'1'" ng-false-value="'0'"> Hiperqueratose
+                </label>
+              </div>           
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="palida" ng-model="vm.anamnesis.palida" ng-true-value="'1'" ng-false-value="'0'"> Pálida
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="psoriase" ng-model="vm.anamnesis.psoriase" ng-true-value="'1'" ng-false-value="'0'"> Psoriase
+                </label>
+              </div>                 
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="cianotica" ng-model="vm.anamnesis.cianotica" ng-true-value="'1'" ng-false-value="'0'"> Cianótica (arroxeada)
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="bromidose" ng-model="vm.anamnesis.bromidose" ng-true-value="'1'" ng-false-value="'0'"> Bromidose
+                </label>
+              </div>                      
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="hiperidrose" ng-model="vm.anamnesis.hiperidrose" ng-true-value="'1'" ng-false-value="'0'"> Hiperidrose
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="pele_manchas" ng-model="vm.anamnesis.pele_manchas" ng-true-value="'1'" ng-false-value="'0'"> Manchas
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="anidrose" ng-model="vm.anamnesis.anidrose" ng-true-value="'1'" ng-false-value="'0'"> Anidrose
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h3 class="col-sm-12 text-center">Outras lesões</h3>
+        <div class="col-sm-12 text-left">
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="fissuras" ng-model="vm.anamnesis.fissuras" ng-true-value="'1'" ng-false-value="'0'"> Fissura
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="tinea_pedis" ng-model="vm.anamnesis.tinea_pedis" ng-true-value="'1'" ng-false-value="'0'"> Tinea Pedias
+                </label>
+              </div>           
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="verruga_plantar" ng-model="vm.anamnesis.verruga_plantar" ng-true-value="'1'" ng-false-value="'0'"> Verruga Plantar HPV
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="tunglase" ng-model="vm.anamnesis.tunglase" value="1" ng-true-value="'1'" ng-false-value="'0'"> Tungiase
+                </label>
+              </div>                 
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="calos" ng-model="vm.anamnesis.calos" ng-true-value="'1'" ng-false-value="'0'"> Calos
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="halux_valgo" ng-model="vm.anamnesis.halux_valgo" ng-true-value="'1'" ng-false-value="'0'"> Hálux Valgo
+                </label>
+              </div>                      
+            </div>
+            <div class="col-lg-3">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="calosidade" ng-model="vm.anamnesis.calosidade" ng-true-value="'1'" ng-false-value="'0'"> Calosidade
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="solucao_continuidade" ng-model="vm.anamnesis.solucao_continuidade" ng-true-value="'1'" ng-false-value="'0'"> Solução de Continuidade
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h3 class="text-center">Observações do paciente</h3>
+        <textarea class="form-control" name="notes" id="notes" ng-model="vm.anamnesis.notes" style="height: 100px;" placeholder="Digite aqui todas as observações do paciente"></textarea>
+      </div>
+      <hr>
+      <div class="form-group text-right">
+        <button type="submit" class="btn btn-success">Atualizar dados</button>
+      </div>
+    </div>
+  </fieldset>
+</form>

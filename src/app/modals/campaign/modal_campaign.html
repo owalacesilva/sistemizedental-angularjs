@@ -1,0 +1,77 @@
+<form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      <span ng-if="!vm.campaign.id">Criar nova campanha</span>
+      <span ng-if="vm.campaign.id">Editar campanha</span>
+      <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+          <label for="title" class="control-label">Campanha</label>
+          <input type="text" class="form-control" name="title" id="title" ng-model="vm.campaign.title" 
+            maxlength="36" required/>
+          <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.title.$invalid && form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group" ng-class="{ 'has-error': form.score.$invalid && form.$submitted }">
+          <label for="score" class="control-label">Regra de Pontos</label>
+          <input type="number" class="form-control" name="score" id="score" ng-model="vm.campaign.score" string-to-number required/>
+          <div ng-messages="form.score.$error" role="alert" class="help-block" ng-if="form.score.$invalid && form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group" ng-class="{ 'has-error': form.date_initial.$invalid && form.$submitted }">
+          <label for="date_initial" class="control-label">Data de inicio</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <input type="date" class="form-control" name="date_initial" id="date_initial" ng-model="vm.campaign.date_initial" as-date required/>
+          </div>
+          <div ng-messages="form.date_initial.$error" role="alert" class="help-block" ng-if="form.date_initial.$invalid && form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group" ng-class="{ 'has-error': form.date_final.$invalid && form.$submitted }">
+          <label for="date_final" class="control-label">Data de término</label>
+          <div class="input-group">
+            <span class="input-group-addon">
+              <i class="fa fa-calendar"></i>
+            </span>
+            <input type="date" class="form-control" name="date_final" id="date_final" ng-model="vm.campaign.date_final" as-date required/>
+          </div>
+          <div ng-messages="form.date_final.$error" role="alert" class="help-block" ng-if="form.date_final.$invalid && form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-if="vm.campaign.id">
+      <label for="opened" class="control-label">Fechar essa campanha</label>
+      <div>                
+        <label class="radio-inline">
+          <input type="radio" ng-model="vm.campaign.opened" name="opened" value="1"> Aberta
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="vm.campaign.opened" name="opened" value="0"> Fechada
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-success" type="submit">Salvar</button>
+  </div>
+</form>

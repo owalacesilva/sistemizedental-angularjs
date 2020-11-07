@@ -1,0 +1,261 @@
+<div class="panel">
+  <div class="panel-body">
+    <form name="form_working_hours" role="form" class="form" ng-submit="vm.onSubmit(form_working_hours.$valid)" novalidate>
+      <fieldset>
+        <legend>
+          Configurar Expediente
+        </legend>
+        <p>Defina o expediente que o Dentista atendera seus pacientes</p>
+        <div class="form-group" ng-class="{ 'has-error': form_working_hours.interval.$invalid && form_working_hours.$submitted }">
+          <label for="interval" class="control-label">Selecione o tempo mínimo do atendimento para esse Dentista</label>
+          <select id="interval" name="interval" class="form-control" ng-model="vm.doctor.working_hours.interval" style="max-width: 230px;" required>
+            <option ng-value="null">Selecione um tempo mínimo</option>
+            <option ng-value="15">15 Minutos</option>
+            <option ng-value="30">30 Minutos</option>
+            <option ng-value="45">45 Minutos</option>
+            <option ng-value="60">1 Hora</option>
+            <option ng-value="75">1 Hora e 15 Minutos</option>
+            <option ng-value="90">1 Hora e 30 Minutos</option>
+            <option ng-value="105">1 Hora e 45 Minutos</option>
+            <option ng-value="120">2 Horas</option>
+          </select>
+          <div ng-messages="form_working_hours.interval.$error" role="alert" class="help-block" ng-if="form_working_hours.interval.$invalid && form_working_hours.$submitted">
+            <span ng-message="required">Campo obrigatório</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="expedient" class="control-label">Clique no dia para configurar o horário de inicio e horário de termino</label>
+          <div class="define-business-hours">
+            <div class="day_container">
+              <div class="text-center">
+                <strong>DOMINGO</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_sunday, 'label-danger': vm.doctor.working_hours.works_sunday }">
+                <span ng-if="!vm.doctor.working_hours.works_sunday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_sunday">Desativar</span>
+                <input type="checkbox" name="works_sunday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_sunday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_sunday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.sunday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="sunday_start_time" ng-model="vm.doctor.working_hours.sunday_start_time" ng-required="vm.doctor.working_hours.works_sunday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.sunday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.sunday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.sunday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="sunday_end_time" ng-model="vm.doctor.working_hours.sunday_end_time" ng-required="vm.doctor.working_hours.works_sunday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.sunday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.sunday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>SEGUNDA</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_monday, 'label-danger': vm.doctor.working_hours.works_monday }">
+                <span ng-if="!vm.doctor.working_hours.works_monday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_monday">Desativar</span>
+                <input type="checkbox" name="works_monday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_monday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_monday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.monday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="monday_start_time" ng-model="vm.doctor.working_hours.monday_start_time" ng-required="vm.doctor.working_hours.works_monday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.monday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.monday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.monday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="monday_end_time" ng-model="vm.doctor.working_hours.monday_end_time" ng-required="vm.doctor.working_hours.works_monday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.monday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.monday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>TERÇA</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_tuesday, 'label-danger': vm.doctor.working_hours.works_tuesday }">
+                <span ng-if="!vm.doctor.working_hours.works_tuesday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_tuesday">Desativar</span>
+                <input type="checkbox" name="works_tuesday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_tuesday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_tuesday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.tuesday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="tuesday_start_time" ng-model="vm.doctor.working_hours.tuesday_start_time"  ng-required="vm.doctor.working_hours.works_tuesday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.tuesday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.tuesday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.tuesday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="tuesday_end_time" ng-model="vm.doctor.working_hours.tuesday_end_time"  ng-required="vm.doctor.working_hours.works_tuesday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.tuesday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.tuesday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>QUARTA</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_wednesday, 'label-danger': vm.doctor.working_hours.works_wednesday }">
+                <span ng-if="!vm.doctor.working_hours.works_wednesday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_wednesday">Desativar</span>
+                <input type="checkbox" name="works_wednesday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_wednesday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_wednesday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.wednesday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="wednesday_start_time" ng-model="vm.doctor.working_hours.wednesday_start_time" ng-required="vm.doctor.working_hours.works_wednesday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.wednesday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.wednesday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.wednesday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="wednesday_end_time" ng-model="vm.doctor.working_hours.wednesday_end_time" ng-required="vm.doctor.working_hours.works_wednesday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.wednesday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.wednesday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>QUINTA</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_thursday, 'label-danger': vm.doctor.working_hours.works_thursday }">
+                <span ng-if="!vm.doctor.working_hours.works_thursday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_thursday">Desativar</span>
+                <input type="checkbox" name="works_thursday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_thursday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_thursday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.thursday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="thursday_start_time" ng-model="vm.doctor.working_hours.thursday_start_time" ng-required="vm.doctor.working_hours.works_thursday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.thursday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.thursday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.thursday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="thursday_end_time" ng-model="vm.doctor.working_hours.thursday_end_time" ng-required="vm.doctor.working_hours.works_thursday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.thursday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.thursday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>SEXTA</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_friday, 'label-danger': vm.doctor.working_hours.works_friday }">
+                <span ng-if="!vm.doctor.working_hours.works_friday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_friday">Desativar</span>
+                <input type="checkbox" name="works_friday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_friday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_friday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.friday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="friday_start_time" ng-model="vm.doctor.working_hours.friday_start_time" ng-required="vm.doctor.working_hours.works_friday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.friday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.friday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.friday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="friday_end_time" ng-model="vm.doctor.working_hours.friday_end_time" ng-required="vm.doctor.working_hours.works_friday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.friday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.friday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="day_container">
+              <div class="text-center">
+                <strong>SÁBADO</strong>
+              </div>
+              <label class="label" ng-class="{ 'label-success': !vm.doctor.working_hours.works_saturday, 'label-danger': vm.doctor.working_hours.works_saturday }">
+                <span ng-if="!vm.doctor.working_hours.works_saturday">Ativar</span>
+                <span ng-if="vm.doctor.working_hours.works_saturday">Desativar</span>
+                <input type="checkbox" name="works_saturday" class="hide" ng-true-value="true" ng-false-value="false" ng-model="vm.doctor.working_hours.works_saturday" />
+              </label>
+              <div ng-if="vm.doctor.working_hours.works_saturday">
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.saturday_start_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="saturday_start_time" ng-model="vm.doctor.working_hours.saturday_start_time" ng-required="vm.doctor.working_hours.works_saturday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.saturday_start_time.$error" role="alert" class="help-block" ng-if="form_working_hours.saturday_start_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': !vm.doctor.working_hours.saturday_end_time && form_working_hours.$submitted }">
+                  <select class="form-control" name="saturday_end_time" ng-model="vm.doctor.working_hours.saturday_end_time" ng-required="vm.doctor.working_hours.works_saturday">
+                    <option ng-repeat="option in vm.rangeHours" ng-value="option.value">
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <div ng-messages="form_working_hours.saturday_end_time.$error" role="alert" class="help-block" ng-if="form_working_hours.saturday_end_time.$invalid && form_working_hours.$submitted">
+                    <span ng-message="required">obrigatório</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <div class="form-group text-left">
+        <button type="submit" class="btn btn-success ">Atualizar Horários</button>
+      </div>
+    </form>
+  </div>
+</div>

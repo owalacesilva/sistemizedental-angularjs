@@ -1,0 +1,45 @@
+<form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      <span>Avaliação do paciente</span>
+      <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="form-group">
+          <label for="title" class="control-label">Paciente</label>
+          <h3>{{ vm.page_rating.patient_name }}</h3>
+          <span>{{ vm.page_rating.phone_number }}</span>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="form-group text-center">
+          <label for="title" class="control-label">Nota</label>
+          <h1>{{ vm.page_rating.vote }}</h1>
+          <span uib-rating ng-model="vm.page_rating.vote" read-only="'true'" aria-labelledby="default-rating"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="title" class="control-label">Comentário do paciente</label>
+      <textarea class="form-control" name="message" id="message" ng-model="vm.page_rating.message" rows="5" readonly></textarea>
+    </div>
+    <div class="form-group">
+      <label for="status" class="control-label">Aprovar essa avaliação?</label>
+      <div>                
+        <label class="radio-inline">
+          <input type="radio" ng-model="vm.page_rating.status" name="status" value="approved"> Aprovar
+        </label>
+        <label class="radio-inline">
+          <input type="radio" ng-model="vm.page_rating.status" name="status" value="blocked"> Deixar Bloqueada
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-success" type="submit">Salvar</button>
+  </div>
+</form>

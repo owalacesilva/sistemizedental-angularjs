@@ -1,0 +1,591 @@
+<script type="text/ng-template" id="modal_category.html">
+  <form id="form" name="form" role="form" class="form-horizontal" ng-submit="vm.submit(form)" novalidate>
+    <div class="modal-header">
+      <h5 class="modal-title">
+        Adicionar nova categoria
+        <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+      </h3>
+    </div>
+    <div class="modal-body">
+      <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+        <label for="title" class="col-lg-4 control-label">Nome da categoria</label>
+        <div class="col-lg-8">
+          <input type="text" class="form-control" name="title" id="title" ng-model="vm.category.title" maxlength="36" required/>
+          <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.type.$invalid && form.$submitted }">
+        <label for="type" class="col-lg-4 control-label">Tipo da categoria</label>
+        <div class="col-lg-8">
+          <select class="form-control" name="type" id="type" ng-model="vm.category.type" required>
+            <option value>Selecione um tipo para essa categoria</option>
+            <option value="1">Serviços</option>
+            <option value="2">Produtos</option>
+          </select>
+          <div ng-messages="form.type.$error" role="alert" class="help-block" ng-if="form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+        <label for="description" class="col-lg-4 control-label">Descrição</label>
+        <div class="col-lg-8">
+          <textarea name="description" id="description" row="4" class="form-control" ng-model="vm.category.description"></textarea>
+          <div ng-messages="form.description.$error" role="alert" class="help-block" ng-if="form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer text-left">
+      <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+      <button class="btn btn-success" type="submit">Salvar categoria</button>
+    </div>
+  </form>
+</script>
+<script type="text/ng-template" id="modal_plans.html">
+  <form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+    <div class="modal-header" style="border-bottom: none !important;">
+      <button class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+      <h3 class="modal-title">Planos e Preços</h3>
+    </div>
+    <div class="modal-body p-h-xxs p-v-xxs">
+      <!-- Definir plano -->
+      <div class="container-fluid" ng-show="!vm.plan">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="panel boxplan text-center">
+              <div class="panel-heading">
+                <small class="p-currency">R$ 19,90</small>
+                <small class="p-duration">/MÊS</small>
+              </div>
+              <div class="panel-body p-h-md p-v-xxs">
+                <h3>Individual</h3>
+                <ul class="list-unstyled">
+                  <li class="p-v-xs"><strong>1 Profissional</strong></li>
+                  <li class="p-v-xs">Sistema de agendamento</li>
+                  <li class="p-v-xs">Gestão financeira</li>
+                  <li class="p-v-xs">Lembretes e alertas de agenda</li>
+                </ul>
+                <div class="form-group">
+                  <select ng-model="vm.duration[0]" class="form-control">
+                    <option value="1">Mensal: R$ 19,90</option>
+                    <option value="6">Semestral: R$ 119,39 (6x 19,90 no Cartão)</option>
+                    <option value="12">Anual: R$ 238,79 (12x 19,90 no Cartão)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-success btn-block" ng-click="vm.choosePlan(0)">Assinar agora</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel boxplan text-center">
+              <div class="panel-heading">
+                <small class="p-currency">R$ 29,90</small>
+                <small class="p-duration">/MÊS</small>
+              </div>
+              <div class="panel-body p-h-md p-v-xxs">
+                <h3>Básico</h3>
+                <ul class="list-unstyled">
+                  <li class="p-v-xs"><strong>3 Profissionais</strong></li>
+                  <li class="p-v-xs">Sistema de agendamento</li>
+                  <li class="p-v-xs">Gestão financeira</li>
+                  <li class="p-v-xs">Lembretes e alertas de agenda</li>
+                </ul>
+                <div class="form-group">
+                  <select ng-model="vm.duration[1]" class="form-control">
+                    <option value="1">Mensal: R$ 29,90</option>
+                    <option value="6">Semestral: R$ 179,39 (6x 29,90 no Cartão)</option>
+                    <option value="12">Anual: R$ 358,79 (12x 29,90 no Cartão)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-success btn-block" ng-click="vm.choosePlan(1)">Assinar agora</button>
+                </div>
+              </div>
+              <span class="flag"></span>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="panel boxplan text-center">
+              <div class="panel-heading">
+                <small class="p-currency">R$ 49,90</small>
+                <small class="p-duration">/MÊS</small>
+              </div>
+              <div class="panel-body p-h-md p-v-xxs">
+                <h3>Avançado</h3>
+                <ul class="list-unstyled">
+                  <li class="p-v-xs"><strong>5 Profissionais</strong></li>
+                  <li class="p-v-xs">Sistema de agendamento</li>
+                  <li class="p-v-xs">Gestão financeira</li>
+                  <li class="p-v-xs">Lembretes e alertas de agenda</li>
+                </ul>
+                <div class="form-group">
+                  <select ng-model="vm.duration[2]" class="form-control">
+                    <option value="1">Mensal: R$ 49,90</option>
+                    <option value="6">Semestral: R$ 299,39  (6x 49,90 no Cartão)</option>
+                    <option value="12">Anual: R$ 598,79 (12x 49,90 no Cartão)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-success btn-block" ng-click="vm.choosePlan(2)">Assinar agora</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <p>A assinatura do Sistemize Dental é individual por empresa. Caso você cadastre outras empresas, você deve adquirir o Sistemize Dental para esta empresa para utilizar nelas os mesmos recursos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" ng-show="vm.plan">
+        <!-- Definir forma de pagamento -->
+        <uib-tabset active="active">
+          <uib-tab index="0">
+            <uib-tab-heading>
+              <i class="fa fa-bell"></i> Cartão de Crédito
+            </uib-tab-heading>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form.card_number.$invalid && form.$submitted }">
+                  <label for="card_number" class="control-label">Número do cartão</label>
+                  <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+                  <div ng-messages="form.card_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+        <div class="form-group">
+          <label class="radio-inline">
+            <input type="radio" name="payment_method" id="card_credit" value="1" ng-true-value="'1'" ng-false-value="'0'"> Cartão de Crédito
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="payment_method" id="boleto" value="1" ng-true-value="'1'" ng-false-value="'0'"> Boleto
+          </label>
+          <label class="radio-inline" style="display:none">
+            <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;">
+            <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+            <input type="hidden" name="code" value="E4551114E3E3EEC444CB6FBDA0C61E59" />
+            <input type="hidden" name="iot" value="button" />
+            <input type="radio" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/209x48-comprar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+            </form>
+            PagSeguro
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="form-group" ng-class="{ 'has-error': form.card_number.$invalid && form.$submitted }">
+              <label for="card_number" class="control-label">Número do cartão</label>
+              <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+              <div ng-messages="form.card_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                <small ng-message="required">Campo obrigatório</small>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form.card_number.$invalid && form.$submitted }">
+                  <label class="control-label">&nbsp;</label>
+                  <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+                  <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form.card_number.$invalid && form.$submitted }">
+                  <label for="card_number" class="control-label">Nome do dono do cartão</label>
+                  <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+                  <div ng-messages="form.card_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-group" ng-class="{ 'has-error': form.card_number.$invalid && form.$submitted }">
+                  <label for="card_number" class="control-label">Código de Segurança (CVV)</label>
+                  <input type="text" class="form-control" id="card_number" name="card_number" ng-model="vm.card_number" ui-mask="9999.9999.9999.9999" ng-required="vm.payment_type == 'C'">
+                  <div ng-messages="form.card_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="1">
+            <uib-tab-heading>
+              <i class="fa fa-bell"></i> Boleto Bancário
+            </uib-tab-heading>
+          </uib-tab>
+          <uib-tab index="2">
+            <uib-tab-heading>
+              <i class="fa fa-bell"></i> PagSeguro
+            </uib-tab-heading>
+            <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+            <input type="hidden" name="code" value="E4551114E3E3EEC444CB6FBDA0C61E59" />
+            <input type="hidden" name="iot" value="button" />
+            <input type="radio" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/209x48-comprar-assina.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />s
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+    <div class="modal-footer text-right" ng-show="vm.plan">
+      <button type="button" class="btn btn-default pull-left">Alterar plano</button>
+      <button type="submit" class="btn btn-success">Gerar Boleto</button>
+      <button type="submit" class="btn btn-success">Assinar</button>
+    </div>
+  </form>
+</script>
+<script type="text/ng-template" id="modal_promotion.html">
+  <form id="form" name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+    <div class="modal-header">
+      <h5 class="modal-title">
+        Criar nova promoção
+        <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+      </h3>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+            <label for="title" class="control-label">Título da promoção</label>
+            <input type="text" class="form-control" name="title" id="title" ng-model="vm.promotion.title" 
+              maxlength="36" required/>
+            <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group" ng-class="{ 'has-error': form.service.$invalid && form.$submitted }">
+            <label for="service" class="control-label">Serviço</label>
+            <input type="text" name="service" ng-model="vm.promotion.service" class="form-control" autocomplete="off" 
+              uib-typeahead="service as service.title for service in vm.getServices($viewValue) | limitTo:10" 
+                typeahead-loading="vm.loading_patients" typeahead-no-results="vm.no_results" 
+                  typeahead-show-hint="true" typeahead-min-length="3" placeholder="Buscar por nome do serviço" required>
+            <div ng-messages="form.service.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+            <label for="description" class="control-label">Descrição</label>
+            <textarea id="description" name="description" class="form-control" ng-model="vm.promotion.description" row="5"></textarea>
+            <div ng-messages="form.description.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+            <label for="percentage_price" class="control-label">Desconto</label>
+            <div class="input-group">
+              <input type="number" class="form-control" name="percentage_price" id="percentage_price" ng-model="vm.promotion.percentage_price" string-to-number required ng-change="vm.changePercentage()"/>
+              <span class="input-group-addon">%</span>
+            </div>
+            <div ng-messages="form.percentage_price.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+            <label for="price" class="control-label">Preço sem desconto</label>
+            <div class="input-group">
+              <span class="input-group-addon">R$</span>
+              <input type="text" class="form-control" name="price" id="price" ng-model="vm.promotion.service.price" ui-money-mask required ng-disabled="true"/>
+            </div>
+            <div ng-messages="form.price.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group" ng-class="{ 'has-error': form.discount_price.$invalid && form.$submitted }">
+            <label for="discount_price" class="control-label">Preço com desconto</label>
+            <div class="input-group">
+              <span class="input-group-addon">R$</span>
+              <input type="text" class="form-control" name="discount_price" id="discount_price" ng-model="vm.promotion.discount_price" ui-money-mask required ng-change="vm.changeDiscountPrice()"/>
+            </div>
+            <div ng-messages="form.discount_price.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group" ng-class="{ 'has-error': form.initial_date.$invalid && form.$submitted }">
+            <label for="initial_date" class="control-label">Data de inicio</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <input type="date" class="form-control" name="initial_date" id="initial_date" ng-model="vm.promotion.initial_date" as-date required/>
+            </div>
+            <div ng-messages="form.initial_date.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="form-group" ng-class="{ 'has-error': form.final_date.$invalid && form.$submitted }">
+            <label for="final_date" class="control-label">Data de término</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+              <input type="date" class="form-control" name="final_date" id="final_date" ng-model="vm.promotion.final_date" as-date required/>
+            </div>
+            <div ng-messages="form.final_date.$error" role="alert" class="help-block" ng-if="form.$submitted">
+              <small ng-message="required">Campo obrigatório</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="form-group">
+            <label for="price" class="control-label">Dias da semana válidos</label>
+            <div class="text-center">        
+              <label class="checkbox-inline">
+                <input type="checkbox" id="sunday" ng-model="vm.promotion.sunday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Domingo
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="monday" ng-model="vm.promotion.monday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Segunda
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="tuesday" ng-model="vm.promotion.tuesday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Terça
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="wednesday" ng-model="vm.promotion.wednesday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Quarta
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="thursday" ng-model="vm.promotion.thursday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Quinta
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="friday" ng-model="vm.promotion.friday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Sexta
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" id="saturday" ng-model="vm.promotion.saturday" value="1" ng-true-value="'1'"  ng-true-false="'0'"> Sabado
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+      <button class="btn btn-success" type="submit">Salvar</button>
+    </div>
+  </form>
+</script>
+<script type="text/ng-template" id="modal_subscription.html">
+  <div class="modal-header" style="border-bottom: none !important;">
+    <button type="button" aria-hidden="true" ng-click="$dismiss()" ng-if="vm.close" class="close">
+      <i class="fa fa-times fa-fw"></i> Fechar
+    </button>
+    <a href="/logout" aria-hidden="true" ng-click="$dismiss()" ng-if="!vm.close" class="close">
+      <i class="fa fa-times fa-fw"></i> Sair
+    </a>
+    <h3 class="modal-title">
+      <i class="fa fa-rocket fa-lg fa-fw"></i> Assinatura
+    </h3>
+  </div>
+  <div class="modal-body p-h-xxs p-v-xxs">
+    <h4 ng-if="!vm.close" class="text-center">Seu periodo de teste chegou ao fim!<br>assine agora para continuar utilizando nosso sistema.<br><br></h4>
+    <div class="container-fluid" ng-show="!vm.plan">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+          <div class="panel boxplan text-center">
+            <div class="panel-heading">
+              <h3>Plano Único</h3>
+              <small class="p-currency">{{ vm.price | currency : 'R$' : 2 }}</small>
+              <small class="p-duration">/POR MÊS</small>
+            </div>
+            <div class="panel-body p-h-md p-v-xxs">
+              <p>Todas as funcionalidades do sistema estão incluidas nesse plano.</p>
+              <div class="form-group">
+                <label for="billing_cycle" class="control-label">Periodo da assinatura</label>
+                <select ng-model="vm.billing_cycle" id="billing_cycle" class="form-control" ng-change="vm.billingCycle()">
+                  <option value>Selecione o periodo</option>
+                  <option value="1">1 Mês</option>
+                  <option value="3">3 Meses (10% Desconto)</option>
+                  <option value="6">6 Meses (20% Desconto)</option>
+                  <option value="12">1 Ano (30% Desconto)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+          <div class="container-fluid">
+            <h4 class="text-center">Formas de Pagamento</h4>
+            <!-- Definir forma de pagamento -->
+            <uib-tabset active="active" justified="true">
+              <uib-tab index="0">
+                <uib-tab-heading>
+                  <strong>PagSeguro</strong>
+                </uib-tab-heading>
+                <div class="p-v-md">
+                  <p>O PagSeguro é uma das formas de pagamento que o OMP aceita para processar os pagamentos. Clique no botão abaixo para ser redirecionado ao PagSeguro.</p>
+                  <div class="text-center">
+                    <img src="./../assets/img/btn_pagseguro.jpg" alt="PagSeguro" class="btn_pagseguro" ng-click="vm.process(1)"/>
+                  </div>
+                </div>
+              </uib-tab>
+              <uib-tab index="1">
+                <uib-tab-heading>
+                  <strong>PicPay</strong>
+                </uib-tab-heading>
+                <div class="p-v-md">
+                  <form action="modal_subscription_submit" method="get" accept-charset="utf-8">
+                    <div class="form-group">
+                      <label for="value" class="control-label">Informe o valor total negociado pelo vendedor</label>
+                      <div class="input-group">
+                        <span class="input-group-addon">R$</span>
+                        <input type="text" class="form-control" name="picpay_value" ng-model="vm.picpay_value" ui-money-mask="2" placeholder="0,00">
+                        <span class="input-group-addon">Valor total negociado</span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="value" class="control-label">Informe o código da transação do PicPay</label>
+                      <input type="text" id="" name="" class="form-control" ng-model="vm.picpay_code" />
+                    </div>
+                    <button type="button" class="btn btn-success" ng-click="vm.process(2)">Finalizar</button>
+                  </form>
+                </div>
+              </uib-tab>
+            </uib-tabset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <p>A assinatura do Sistemize Dental é individual por empresa. Caso você cadastre outras empresas, você deve adquirir o Sistemize Dental para esta empresa para utilizar nelas os mesmos recursos.</p>
+    <small><i class="fa fa-lock fa-lg fa-fw" style="color: green;"></i> Todas as transações são seguras e criptografadas, e nunca armazenamos suas informações de cartão de crédito.</small>
+  </div>
+</script>
+<script type="text/ng-template" id="modal_offline_mode.html">
+  <div class="modal-header" style="border-bottom: none !important;">
+    <button type="button" aria-hidden="true" ng-click="$dismiss()" class="close">
+      <i class="fa fa-times fa-fw"></i> Fechar
+    </button>
+    <h3 class="modal-title">
+      <i class="fa fa-exclamation-triangle fa-lg fa-fw"></i> Você está no Modo Offline
+    </h3>
+  </div>
+  <div class="modal-body">
+    <h2 class="text-center">Instruções</h2>
+    <h3>Como funciona ?</h3>
+    <p>Quando o sistema identificar que você está sem internet, automaticamente suas ultimas consultas na agenda seram salvas no navegador, posibilitando que você continue atendendo seus pacientes e visualizando as proximas consultas.<br><br></p>
+    <h3>Última semana</h3>
+    <p>O sistema mantem um historico das ultimas consultas que voc visualizou na agenda.<br><br></p>
+    <h3>Consigo marcar novas consultas ?</h3>
+    <p>Sim! você consegue marcar normalmenete novas consultas em qualquer dia e horario. Quando sua internet retornar o sistema sincronizara as consultas marcadas no modo offline com o servidor.<br><br></p>
+  </div>
+  <div class="modal-footer">
+    <small><i class="fa fa-lock fa-lg fa-fw" style="color: green;"></i> Todas as transações são seguras e criptografadas, e nunca armazenamos suas informações de cartão de crédito.</small>
+  </div>
+</script>
+<script type="text/ng-template" id="modal_view_appointment.html">
+  <div class="modal-header">
+    <span class="modal-title">Procedimento da Consulta
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-5">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-lg-5 control-label">Número da appointmenta</label>
+              <div class="col-lg-7">
+                <p class="form-control-static">{{ vm.appointment.id }}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-5 control-label">Agendado em:</label>
+              <div class="col-lg-7">
+                <p class="form-control-static">{{ vm.appointment.created_at }}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-5 control-label">Data da appointmenta</label>
+              <div class="col-lg-7">
+                <p class="form-control-static">{{ vm.appointment.appointment_date }}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-lg-5 control-label">Nome do Dentista</label>
+              <div class="col-lg-7">
+                <p class="form-control-static">{{ vm.appointment.doctor }}</p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-7">
+          <div ng-show="!vm.appointment.procedures.length" class="text-center">
+            Nenhuma foto carregada
+          </div>
+          <div ng-show="vm.appointment.procedures.length">
+            <h5 class="text-center">Evolução durante essa appointmenta</h5>
+            <div class="well">        
+              <uib-accordion close-others="true">
+                <uib-accordion-group ng-repeat="procedure in vm.appointment.procedures">
+                  <uib-accordion-heading>
+                    {{ procedure.title }} <i class="pull-right fa" ng-class="{'fa-chevron-down': status.open, 'fa-chevron-right': !status.open}"></i>
+                  </uib-accordion-heading>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <img ng-src="{{ procedure.url_photo_left_foot }}" src="" class="img-thumbnail" alt="{{ procedure.title }}" style="max-width: 100%;max-height: 200px;">
+                      </div>
+                      <div class="col-lg-6">
+                        <img ng-src="{{ procedure.url_photo_right_foot }}" src="" class="img-thumbnail" alt="{{ procedure.title }}" style="max-width: 100%;max-height: 200px;">
+                      </div>
+                      <div class="col-lg-12">
+                        <hr>
+                        <p>{{ procedure.notes }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </uib-accordion-group>
+              </uib-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="vm.close()">
+      Fechar
+    </button>
+  </div>
+</script>
+<script type="text/ng-template" id="modal_view_image.html">
+  <div class="modal-header">
+    <button class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+  </div>
+  <div class="modal-body p-h-xxs p-v-xxs">
+    <div class="text-center">
+      <img ng-src="{{ vm.photo_url }}" alt="" style="max-width: 100%;max-height: 100%;">
+    </div>
+  </div>
+</script>
+<script type="text/ng-template" id="welcome.html">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-10">
+        <h2>Seja Bem-vindo</h2>
+  Registre seu tempo de forma fácil e rápida, tanto em seu trabalho quanto em projetos pessoais.
+
+  O aplicativo ajuda a preencher e inserir seus registros de tempo de forma inteligente, o permite controlar seu tempo de maneira consistente e precisa.
+
+  Registre a utilização do tempo em projetos coletivos da mesma forma fácil como em seus projetos individuais observe o aumento do tempo proveitoso e dos valores a faturar na forma de relatórios detalhados de projetos e da equipe.
+
+  Eu não gosto de tourIniciar tour
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-click="vm.close()">Fechar</button>
+  </div>
+</script>

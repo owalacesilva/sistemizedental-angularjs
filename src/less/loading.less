@@ -1,0 +1,205 @@
+.loading {
+  // background: rgba(255, 255, 255, .7);
+  display: none;
+  background: rgb(255, 255, 255);
+  z-index: 1000;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: wait;
+  position: fixed;
+  z-index: 9999;
+}
+
+[ng-cloak].loading {
+  display: block !important;
+}
+
+.circleG {
+  text-align: center;
+  height: 10px;
+  width: 50px;
+  margin: 230px auto 0
+}
+
+.circleG span {
+  background-color: #fff;
+  float: left;
+  height: 10px;
+  margin-left: 6px;
+  width: 10px;
+  animation-name: bounce_circleG;
+  -o-animation-name: bounce_circleG;
+  -ms-animation-name: bounce_circleG;
+  -webkit-animation-name: bounce_circleG;
+  -moz-animation-name: bounce_circleG;
+  animation-duration: 1.3675s;
+  -o-animation-duration: 1.3675s;
+  -ms-animation-duration: 1.3675s;
+  -webkit-animation-duration: 1.3675s;
+  -moz-animation-duration: 1.3675s;
+  animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  animation-direction: normal;
+  -o-animation-direction: normal;
+  -ms-animation-direction: normal;
+  -webkit-animation-direction: normal;
+  -moz-animation-direction: normal;
+  border-radius: 7px;
+  -o-border-radius: 7px;
+  -ms-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px
+}
+
+#circleG_1 {
+  animation-delay: .2695s;
+  -o-animation-delay: .2695s;
+  -ms-animation-delay: .2695s;
+  -webkit-animation-delay: .2695s;
+  -moz-animation-delay: .2695s
+}
+
+#circleG_2 {
+  animation-delay: .6355s;
+  -o-animation-delay: .6355s;
+  -ms-animation-delay: .6355s;
+  -webkit-animation-delay: .6355s;
+  -moz-animation-delay: .6355s
+}
+
+#circleG_3 {
+  animation-delay: .8185s;
+  -o-animation-delay: .8185s;
+  -ms-animation-delay: .8185s;
+  -webkit-animation-delay: .8185s;
+  -moz-animation-delay: .8185s
+}
+
+@keyframes bounce_circleG {
+  50% {
+    background-color: #009688
+  }
+}
+
+@-o-keyframes bounce_circleG {
+  50% {
+    background-color: #009688
+  }
+}
+
+@-ms-keyframes bounce_circleG {
+  50% {
+    background-color: #009688
+  }
+}
+
+@-webkit-keyframes bounce_circleG {
+  50% {
+    background-color: #009688
+  }
+}
+
+@-moz-keyframes bounce_circleG {
+  50% {
+    background-color: #009688
+  }
+}
+
+
+/**
+ * Style para animação  de loading padrão do sistema
+ * ==================================================
+ */
+@animationLength: 1.5s;
+@animationRadius: 12px;
+@dotSize: 8px;
+
+.loading-container {
+  position: absolute;
+  width: 100%;
+  height: 100%; 
+  display: none;
+  background-color: #fff;
+  z-index: 99;
+
+  .loader { 
+    position: relative; 
+    width: @animationRadius * 3 + @dotSize;
+    height: @dotSize; 
+    margin: @animationRadius auto; 
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .dot {
+    display: inline-block;
+    width: @dotSize;
+    height: @dotSize;
+    border-radius: @dotSize * 0.5;
+    background: #aaa;
+    position: absolute;
+  }
+
+  .dot_1 {
+    animation: animateDot1 @animationLength linear infinite;
+    left: @animationRadius;
+    background: #22baa0; 
+  }
+
+  .dot_2 {
+    animation: animateDot2 @animationLength linear infinite;
+    animation-delay: @animationLength / 3;
+    left: @animationRadius * 2;
+  }
+
+  .dot_3 {
+    animation: animateDot3 @animationLength linear infinite;
+    left: @animationRadius;
+  }
+
+  .dot_4 {
+    animation: animateDot4 @animationLength linear infinite;
+    animation-delay: @animationLength / 3;
+    left: @animationRadius * 2;
+  }
+
+  @keyframes animateDot1 {
+    0%{ transform: rotate(0deg) translateX(-@animationRadius); }
+    25% { transform: rotate(180deg) translateX(-@animationRadius); }
+    75% { transform: rotate(180deg) translateX(-@animationRadius); }
+    100% { transform: rotate(360deg) translateX(-@animationRadius); }
+  }
+
+  @keyframes animateDot2 {
+    0%{ transform: rotate(-0deg) translateX(-@animationRadius); }
+    25% { transform: rotate(-180deg) translateX(-@animationRadius); }
+    75% { transform: rotate(-180deg) translateX(-@animationRadius); }
+    100% { transform: rotate(-360deg) translateX(-@animationRadius); }
+  }
+
+  @keyframes animateDot3 {
+    0%{ transform: rotate(0deg) translateX(@animationRadius); }
+    25% { transform: rotate(180deg) translateX(@animationRadius); }
+    75% { transform: rotate(180deg) translateX(@animationRadius); }
+    100% { transform: rotate(360deg) translateX(@animationRadius); }
+  }
+
+  @keyframes animateDot4 {
+    0%{ transform: rotate(-0deg) translateX(@animationRadius); }
+    25% { transform: rotate(-180deg) translateX(@animationRadius); }
+    75% { transform: rotate(-180deg) translateX(@animationRadius); }
+    100% { transform: rotate(-360deg) translateX(@animationRadius); }
+  }
+}
+
+[ng-cloak].loading-container {
+  display: table !important;
+}

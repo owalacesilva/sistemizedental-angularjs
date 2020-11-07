@@ -1,0 +1,40 @@
+<form name="form" role="form" class="form" ng-submit="vm.onSubmit(form)" novalidate>
+  <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">Fechar</button>
+    <h4 class="modal-title">Retirada de Valores <strong>Sangria</strong></h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="form-group">
+          <label class="control-label">Valor</label>
+          <div class="input-group">
+            <span class="input-group-addon">R$</span>
+            <input type="text" class="form-control" name="total_amount" ng-model="vm.transaction.total_amount" ui-money-mask="2" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="form-group">
+          <label class="control-label">Forma de Pagamento</label>
+          <select class="form-control" name="payment_method" ng-model="vm.transaction.payment_method_id">
+            <option ng-repeat="payment in vm.payment_methods" ng-value="payment.id">{{payment.title}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Descrição</label>
+      <textarea class="form-control" name="description" rows="5" placeholder="Ex: Pagamento de Fornecedores" ng-model="vm.transaction.description"></textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-success">
+      <i class="fa fa-check fa-fw"></i> Realizar
+    </button>
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">
+      <i class="fa fa-ban fa-fw"></i> Cancelar
+    </button>
+  </div>
+</form>
+  

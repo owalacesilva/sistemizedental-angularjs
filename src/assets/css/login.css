@@ -1,0 +1,149 @@
+html, 
+body,
+.full-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: "proxima-nova", sans-serif;
+  color: #4e5e6a;
+  font-size: 13px;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+  margin: 10px 0px;
+}
+
+.form-control {
+  border-radius: 2px;
+}
+
+.no-s {
+  margin: 0px!important;
+  padding: 0px!important;
+}
+
+.p {
+  padding: 15px !important;
+}
+
+.no-p {
+  padding: 0 !important;
+}
+
+.p-h-xxs {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.p-h-xs {
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.p-h-sm {
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.no-p-h {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-p-v {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.no-p-t {
+  padding-top: 0 !important;
+}
+
+.no-p-l {
+  padding-left: 0 !important;
+}
+
+.no-p-b {
+  padding-bottom: 0 !important;
+}
+
+.no-p-r {
+  padding-right: 0 !important;
+}
+
+.p-h-md {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.p-h-lg {
+  padding-left: 25px !important;
+  padding-right: 25px !important;
+}
+
+.p-h-xxl {
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+}
+
+.p-v-xxs {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+.p-v-xs {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.p-v-sm {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.p-v-md {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.p-v-lg {
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+}
+
+.p-v-xxl {
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+
+#page-login {
+  background-color: #ececec;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  overflow: auto;
+
+}
+.container {
+  max-width: 800px;
+}
+
+.panel {
+  margin: 0px auto;
+  border: none;
+  background-color: #79bc9a;
+
+}
+.col-mkt {
+  min-height: 350px;
+  padding-top: 30px;
+
+}
+
+.col-form {
+  background-color: #fff;
+}

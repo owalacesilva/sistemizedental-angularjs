@@ -1,0 +1,170 @@
+<div class="p-v-xs">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+        <div class="panel">
+          <div class="panel-heading">
+            <h5 class="panel-title">
+              <b>Demostrativo caixa</b>
+            </h5>
+          </div>
+          <div class="panel-body">
+            <table class="table table-condensed table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>Forma de Pagamento</th>
+                  <th>Comandas</th>
+                  <th>Suprimentos</th>
+                  <th>Sangrias</th>
+                  <th>Despesas</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-if="vm.cashier.id" ng-repeat="payment in vm.payment_methods track by payment.id">
+                  <td ng-bind="payment.title"></td>
+                  <td>
+                    <span ng-class="{ 'text-danger': payment.income < 0, 'text-success': payment.income > 0 }">{{ payment.income }}</span>
+                  </td>
+                  <td>
+                    <span ng-class="{ 'text-danger': payment.supply < 0, 'text-success': payment.supply > 0 }">{{ payment.supply }}</span>
+                  </td>
+                  <td>
+                    <span ng-class="{ 'text-danger': payment.cashout < 0, 'text-success': payment.cashout > 0 }">{{ payment.cashout }}</span>
+                  </td>
+                  <td>
+                    <span ng-class="{ 'text-danger': payment.expense < 0, 'text-success': payment.expense > 0 }">{{ payment.expense }}</span>
+                  </td>
+                  <td>
+                    <span ng-class="{ 'text-danger': payment.total_amount < 0, 'text-success': payment.total_amount > 0 }">{{ payment.total_amount }}</span>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot ng-if="vm.total_payments.length">
+                <tr>
+                  <th>Total em Caixa</th>
+                  <td ng-class="{ 'text-success': vm.total_payments['income'] > 0 }">{{ vm.total_payments['income'] }}</td>
+                  <td ng-class="{ 'text-success': vm.total_payments['supply'] > 0 }">{{ vm.total_payments['supply'] }}</td>
+                  <td ng-class="{ 'text-danger': vm.total_payments['cashout'] < 0 }">{{ vm.total_payments['cashout'] }}</td>
+                  <td ng-class="{ 'text-danger': vm.total_payments['expense']< 0 }">{{ vm.total_payments['expense'] }}</td>
+                  <th ng-class="{ 'text-danger': vm.total_payments['total_amount'] < 0 }">{{ vm.total_payments['total_amount'] }}</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="panel">
+          <div class="panel-heading">
+            <h5 class="panel-title">
+              <strong ng-if="!vm.cashier.id">Nenhum caixa aberto</strong>
+              <strong ng-if="vm.cashier.id">Caixa: {{vm.cashier.id}}</strong>
+              <span class="pull-right" ng-if="vm.cashier.id">{{vm.cashier.created_at | asDate | date : "dd/MM/yyyy 'às' H:m"}}</span>
+            </h5>
+          </div>
+          <div class="panel-body">
+            <div class="row m-b-xs" ng-if="vm.cashier.id">
+              <div class="col-lg-6 p-h-xs">
+                <button ng-click="vm.createIncome()" class="btn btn-default btn-block">
+                  <i class="fa fa-sign-in"></i> Suprimento
+                </button>
+              </div>
+              <div class="col-lg-6 p-h-xs">
+                <button ng-click="vm.createExpense()" class="btn btn-default btn-block">
+                  <i class="fa fa-sign-out"></i> Sangria
+                </button>
+              </div>
+            </div>
+            <div class="row m-b-xs" ng-if="vm.cashier.id">
+              <div class="col-lg-6 p-h-xs">
+                <a ui-sref="app.financial.accountables" class="btn btn-default btn-block">
+                  <i class="fa fa-files-o"></i> Contas à Pagar
+                </a>
+              </div>
+              <div class="col-lg-6 p-h-xs">
+                <a ui-sref="app.financial.transactions" class="btn btn-default btn-block">
+                  <i class="fa fa-exchange fa-rotate-270"></i> Extrato Financeiro
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 p-h-xs" ng-if="!vm.cashier.id">
+                <button ng-click="vm.openCashier()" type="button" class="btn btn-primary btn-block">
+                  <i class="fa fa-plus"></i> Abrir caixa
+                </button>
+              </div>
+              <div class="col-lg-6 p-h-xs" ng-if="vm.cashier.id">
+                <button ng-click="vm.closeCashier()" type="button" class="btn btn-danger btn-block">
+                  <i class="fa fa-power-off"></i> Fechar caixa
+                </button>
+              </div>
+              <div class="col-lg-6 p-h-xs">
+                <a ui-sref="app.financial.cashiers" class="btn btn-default btn-block">
+                  <i class="fa fa-print"></i> Histórico de caixa
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel" ng-if="!vm.cashier.id">
+    <div class="panel-body text-center">
+      <h2>Caixa fechado</h2>
+      <p>Você precisa abrir um novo caixa para registrar suas vendas e ordens de serviço</p>
+      <button ng-click="vm.openCashier()" type="button" class="btn btn-primary">
+        <i class="fa fa-plus fa-fw"></i> Abrir caixa
+      </button>
+    </div>
+  </div>
+  <div class="panel" ng-if="vm.cashier.id">
+    <div class="panel-heading">
+      <h5 class="panel-title">
+        <b>Pagamentos de consultas realizados nesse caixa</b>
+      </h5>
+      <span>Abaixo estão todos os pagamentos de consultas vinculados ao caixa em aberto. <a ui-sref="app.financial.transactions" title="Fluxo de Caixa">Clique Aqui para Fluxo de caixa.</a></span>
+    </div>
+    <form role="form" class="form" ng-submit="vm.refresh()">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 m-b-xs">
+            <label for="date_start" class="control-label">
+              <i class="fa fa-calendar fa-lg fa-fw"></i> Data inicial
+            </label>
+            <input type="date" id="date_start" name="date_start" ng-model="vm.date_start" class="form-control" />
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xs m-b-xs">
+            <label for="date_end" class="control-label">
+              <i class="fa fa-calendar fa-lg fa-fw"></i> Data final
+            </label>
+            <input type="date" id="date_end" name="date_end" ng-model="vm.date_end" class="form-control" />
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xs m-b-xs">
+            <label>&nbsp;</label><br>
+            <button type="submit" class="btn btn-success">
+              <i class="fa fa-search fa-fw"></i> Buscar
+            </button>&nbsp;
+            <button type="button" class="btn btn-default">Limpar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 m-b-xs">
+            <span uib-dropdown on-toggle="vm.toggled(open)">
+              <a href id="daterange-dropdown" class="btn btn-link no-p-h" uib-dropdown-toggle>
+                Exibir resultados de: <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="daterange-dropdown">
+                <li ng-repeat="period in vm.periods" ng-click="vm.selectPeriod($index)">
+                  <a href>{{period.label}}</a>
+                </li>
+              </ul>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+    <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover table-commands display" cellspacing="0" width="100%"></table>
+  </div>
+</div>

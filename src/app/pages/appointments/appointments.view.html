@@ -1,0 +1,68 @@
+<div class="p-h-xs p-v-xs">
+  <div class="panel">
+    <div class="panel-heading">
+      <h5 class="panel-title">Histórico de consultas agendadas</h5>
+      <span>Lista de consultas agendadas na clínica</span>
+    </div>
+    <form role="form" class="form" ng-submit="vm.refresh()">
+      <div class="container-fluid">
+        <div class="row" style="margin: 0px;">
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+            <label for="date_start" class="control-label">
+              <i class="fa fa-calendar fa-lg fa-fw"></i> Data inicial
+            </label>
+            <input type="date" id="date_start" name="date_start" ng-model="vm.date_start" class="form-control" />
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+            <label for="date_end" class="control-label">
+              <i class="fa fa-calendar fa-lg fa-fw"></i> Data final
+            </label>
+            <input type="date" id="date_end" name="date_end" ng-model="vm.date_end" class="form-control" />
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+            <label for="origin" class="control-label">
+              <i class="fa fa-calendar fa-fw"></i> Origem:&nbsp;
+            </label>
+            <select id="origin" name="origin" ng-model="vm.origin" class="form-control">
+              <option ng-value="null">Todos</option>
+              <option ng-value="'assistant'">Agenda</option>
+              <option ng-value="'fanpage'">Fanpage</option>
+              <option ng-value="'landing_page'">Landing Page</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+            <label for="doctor_id" class="control-label">
+              <i class="fa fa-user-md fa-fw"></i> Dentista:&nbsp;
+            </label>
+            <select id="doctor_id" name="doctor_id" ng-model="vm.doctor_id" class="form-control">
+              <option ng-value="null">Apenas da Clínica</option>
+              <option ng-repeat="doctor in vm.doctors" ng-value="doctor.id">{{ doctor.first_name }}</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+            <label>&nbsp;</label><br>
+            <button type="submit" class="btn btn-success">
+              <i class="fa fa-search fa-fw"></i> Buscar
+            </button>&nbsp;
+            <button type="button" class="btn btn-default">Limpar</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 m-b-xxs">
+            <span uib-dropdown on-toggle="vm.toggled(open)">
+              <a href id="daterange-dropdown" class="btn btn-link no-p-h" uib-dropdown-toggle>
+                Exibir resultados de: <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="daterange-dropdown">
+                <li ng-repeat="period in vm.periods" ng-click="vm.selectPeriod($index)">
+                  <a href>{{period.label}}</a>
+                </li>
+              </ul>
+            </span>
+          </div>          
+        </div>
+      </div>
+    </form>
+    <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover display" cellspacing="0" width="100%"></table>
+  </div>
+</div>

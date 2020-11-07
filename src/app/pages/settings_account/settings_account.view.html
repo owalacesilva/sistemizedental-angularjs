@@ -1,0 +1,152 @@
+<div class="p-h-xs m-t-xs">
+  <uib-tabset active="0" justified="false">
+    <uib-tab index="0" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-wrench fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Informações da Página</span>
+      </uib-tab-heading>
+      <div class="panel">
+        <div class="panel-body">
+          <form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+            <div class="row">
+              <div class="col-lg-6">
+                <fieldset>
+                  <legend>Informação da Clínica</legend>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group" ng-class="{ 'has-error': form.display_name.$invalid && form.$submitted }">
+                        <label for="display_name" class="control-label">Nome da clínica</label>
+                        <input type="text" name="display_name" ng-model="vm.account.display_name" class="form-control" required/>
+                        <div ng-messages="form.display_name.$error" ng-if="form.$submitted">
+                          <span ng-message="required">Campo Obrigatório</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group" ng-class="{ 'has-error': form.phone_number.$invalid && form.$submitted }">
+                        <label for="phone_number" class="control-label">Telefone para contatos</label>
+                        <input type="text" name="phone_number" ng-model="vm.account.phone_number" class="form-control" ui-mask="(99) ?99999-9999" model-view-value="true" required/>
+                        <div ng-messages="form.phone_number.$error" ng-if="form.$submitted">
+                          <span ng-message="required">Campo Obrigatório</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="short_about_me" class="control-label">Descreva seus serviços</label>
+                    <input id="short_about_me" name="short_about_me" ng-model="vm.account.short_about_me" maxlength="255" class="form-control" placeholder="Tratamento Cirurgico De Varizes Da Safena Externa Unilateral" />
+                  </div>
+                  <div class="form-group">
+                    <label for="about_me" class="control-label">Descreva sobre sua clínica</label>
+                    <textarea id="about_me" name="about_me" ng-model="vm.account.about_me" rows="5" maxlength="255" class="form-control" placeholder="Esse texto irá aparecer na busca"></textarea>
+                  </div>
+                  <div class="form-group" ng-class="{ 'has-error': form.username.$invalid && form.$submitted }">
+                    <label for="username" class="control-label">Nome da sua página</label>
+                    <div class="input-group">
+                      <span class="input-group-addon">
+                        {{ $root.url_paths.account_page_path }}
+                      </span>
+                      <input type="text" id="username" name="username" ng-model="vm.account.username" class="form-control" required/>
+                      <span class="input-group-btn">
+                        <a class="btn btn-default" ng-href="{{ $root.url_paths.account_page_path + vm.account.username }}" target="_blank">
+                          <i class="fa fa-external-link"></i> Abrir
+                        </a>
+                      </span>
+                    </div>
+                    <div ng-messages="form.username.$error" ng-if="form.$submitted">
+                      <span ng-message="required">Campo Obrigatório</span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                      <div class="form-group">
+                        <label for="timezone" class="control-label">Fuso horário</label>
+                          <select id="timezone" name="timezone" ng-model="vm.account.timezone" class="form-control">
+                          <option ng-value="null" disabled>&#8212;Selecione uma fuso horário&#8212;</option>
+                          <option ng-repeat="option in vm.tzInts" ng-value="option.value">
+                            {{ option.label }}
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label">Logomarca da sua clínica</label>
+                    <table class="upload-container">
+                      <tbody><tr>
+                        <td>
+                          <div class="profile-image-upload-async">
+                            <img ngf-thumbnail="vm.account.avatar_url || 'https://sistemizedental.s3.sa-east-1.amazonaws.com/avatars/avatar_1.jpg'" width="60" height="60" alt="{{ vm.account.diplay_name }}" class="img-circle" />
+                          </div>
+                        </td>
+                        <td class="p-h-xs">
+                          <button 
+                            type="button"
+                            class="btn btn-success btn-sm"
+                            ngf-select="vm.uploadAvatar($file)"
+                            ngf-accept="'image/*'"
+                            ngf-pattern="'image/*'"
+                            ngf-max-size="20MB" 
+                            ngf-min-height="100">
+                            Alterar foto
+                          </button>
+                        </td>
+                        <td class="p-h-xs hide">
+                          <a href="#" class="remove btn btn-link btn-xs" data-action="remove-picture">Remover</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+                  <div class="form-group">
+                    <label for="searchable" class="control-label">Divulgar no Portal</label>
+                    <div>                
+                      <label class="radio-inline">
+                        <input type="radio" ng-model="vm.account.searchable" name="searchable" ng-value="true"> Ativar
+                      </label>
+                      <label class="radio-inline">
+                        <input type="radio" ng-model="vm.account.searchable" name="searchable" ng-value="false"> Desativar
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                  <legend>Endereço da busca</legend>
+                  <div class="form-group">
+                    <label class="control-label" for="formatted_address">Endereço completo</label>
+                    <input type="text" class="form-control" id="formatted_address" name="formatted_address" ng-model="vm.account.formatted_address"/>
+                  </div>
+                  <div class="form-group">
+                    <div id="map" style="background-color: #ccc;height: 260px;width: 100%;"></div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="form-group text-right">
+              <button type="submit" class="btn btn-primary">Atualizar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab index="1" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-share-alt fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Trocar senha</span>
+      </uib-tab-heading>
+      <div ui-view="password"></div>
+    </uib-tab>
+    <uib-tab index="2" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-share-alt fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Redes Sociais</span>
+      </uib-tab-heading>
+      <div ui-view="social_media"></div>
+    </uib-tab>
+    <uib-tab index="3" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-television fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Galeria de Fotos</span>
+      </uib-tab-heading>
+      <div ui-view="gallery"></div>
+    </uib-tab>
+  </uib-tabset>
+</div>

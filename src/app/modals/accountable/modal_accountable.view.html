@@ -1,0 +1,110 @@
+<form name="form" role="form" class="form-horizontal" ng-submit="vm.onSubmit(form)" novalidate>
+  <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">Fechar</button>
+    <h4 class="modal-title" ng-if="vm.accountable.kind === 'income'">Recebimento</h4>
+    <h4 class="modal-title" ng-if="vm.accountable.kind === 'expense'">Pagamento</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row" ng-class="{ 'has-error': form.due_date.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Data de vencimento: </label>
+      <div class="col-sm-6">
+        <input type="date" class="form-control" name="due_date" ng-model="vm.accountable.due_date" date-to-string required />
+        <div ng-messages="form.due_date.$error" role="alert" class="help-block no-s" ng-if="form.due_date.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Título da conta: </label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="title" ng-model="vm.accountable.title" required />
+        <div ng-messages="form.title.$error" role="alert" class="help-block no-s" ng-if="form.title.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.cost.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Valor da conta: </label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" name="cost" ng-model="vm.accountable.cost" ui-money-mask="2" required />
+        <div ng-messages="form.cost.$error" role="alert" class="help-block no-s" ng-if="form.cost.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.payment_method.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Forma de Pagamento: </label>
+      <div class="col-sm-6">
+        <select class="form-control" name="payment_method" ng-model="vm.accountable.payment_method_id" required>
+          <option value disabled>&#8212;Selecione uma forma&#8212;</option>
+          <option ng-repeat="payment in vm.payment_methods" ng-value="payment.id">{{payment.title}}</option>
+        </select>
+        <div ng-messages="form.payment_method.$error" role="alert" class="help-block no-s" ng-if="form.payment_method.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.category.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Categoria: </label>
+      <div class="col-sm-6">
+        <select ng-if="!vm.toggle_category" class="form-control" name="category" ng-model="vm.accountable.category_id" required>
+          <option value disabled>&#8212;Selecione uma categoria&#8212;</option>
+          <option ng-repeat="category in vm.category_list" ng-value="category.id">{{category.title}}</option>
+        </select>
+        <input ng-if="vm.toggle_category" type="text" name="category_title" class="form-control m-b-sm" ng-model="vm.accountable.category.title" placeholder="Nome da Categoria" required />
+        <div ng-if="vm.toggle_category" ng-messages="form.category_title.$error" role="alert" class="help-block no-s" ng-if="form.category_title.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+        <textarea ng-if="vm.toggle_category" name="category_description" rows="2" class="form-control" ng-model="vm.accountable.category.description" placeholder="Descrição da Categoria"></textarea>
+        <div ng-messages="form.category_description.$error" role="alert" class="help-block no-s" ng-if="form.category_description.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+      <div class="col-lg-2 no-p-h" ng-switch on="vm.toggle_category">
+        <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="false" class="display-block m-t-xxs">
+          <i class="fa fa-plus"></i> Adicionar
+        </a>
+        <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="true" class="display-block m-t-xxs text-danger">
+          <i class="fa fa-ban"></i> Cancelar
+        </a>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.paid.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Já esta pago?</label>
+      <div class="col-sm-6">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="paid" ng-model="vm.accountable.paid" ng-disabled="vm.accountable.id" ng-false-value="false" ng-true-value="true"> Sim
+          </label>
+        </div>
+        <small>Determina se a primeira parcela já está paga</small>
+      </div>
+    </div>
+    <!--<div class="form-group row">
+      <label class="col-sm-4 control-label">Pagamento recorrente?</label>
+      <div class="col-sm-6">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" checked disabled> Sim
+          </label>
+        </div>
+      </div>
+    </div>-->
+    <div class="form-group row" ng-class="{ 'has-error': form.recurrences.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Pagamento recorrente em</label>
+      <div class="col-sm-6">
+        <select class="form-control" name="recurrences" ng-model="vm.accountable.recurrences" ng-required="vm.accountable.recurrence == '1'">
+          <option ng-repeat="n in [].constructor(24) track by $index" ng-if="$index > 0" ng-value="$index">{{$index}} vezes</option>
+        </select>
+        <div ng-messages="form.recurrences.$error" role="alert" class="help-block no-s" ng-if="form.recurrences.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$dismiss()">Cancelar</button>
+    <button type="submit" class="btn btn-success" ng-if="!vm.accountable.id">Adicionar conta</button>
+    <button type="submit" class="btn btn-primary" ng-if="vm.accountable.id">Atualizar conta</button>
+  </div>
+</form>

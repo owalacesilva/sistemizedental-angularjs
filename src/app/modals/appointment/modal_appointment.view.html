@@ -1,0 +1,204 @@
+<form name="form" role="form" class="form-horizontal" ng-submit="vm.onSubmit(form)" novalidate>
+  <div class="modal-body">
+    <uib-tabset active="active">
+      <uib-tab index="0">
+        <uib-tab-heading>
+          <i class="fa fa-calendar fa-lg"></i> Nova Consulta
+        </uib-tab-heading>
+        <div class="p-h-xs p-v-xs">
+        	<h4 class="text-center">Marcar nova consulta</h4>
+        	<div class="row">
+        		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        			<div class="form-group" ng-class="{ 'has-error': form.date_at.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Data da consulta: </label>
+                <div class="col-sm-8">
+                	<input type="date" class="form-control" name="date_at" ng-model="vm.appointment.date_at" ng-change="vm.changeDate()" autofocus="on" date-to-string required/>
+                  <div ng-messages="form.date_at.$error" role="alert" class="help-block" ng-if="form.date_at.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.client.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Paciente: </label>
+                <div class="col-sm-8">
+                  <div class="input-group">
+                    <input type="text" name="client" ng-model="vm.appointment.client.full_name" class="form-control" autocomplete="off" 
+                      uib-typeahead="client as client.full_name for client in vm.getClients($viewValue) | limitTo:10" 
+                        typeahead-loading="vm.loading_clients" typeahead-no-results="vm.no_results" typeahead-on-select="vm.selectClient($item, $model, $label, $event)"  
+                          typeahead-show-hint="true" typeahead-min-length="3" placeholder="Buscar por nome do paciente" required />
+                    <span class="input-group-addon text-danger" ng-style="{ 'color': vm.appointment.client.balance > -1 ? 'green' : 'red' }">
+                      {{ vm.appointment.client.balance | currency : 'R$ ' : 2 }}
+                    </span>
+                  </div>
+                  <div ng-messages="form.client.$error" role="alert" class="help-block" ng-if="form.client.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                  <div class="pull-left" ng-if="vm.appointment.client.id">
+                    <a class="text-underline" ui-sref="app.clients.edit({ id: vm.appointment.client.id })">Ver seu cadastro</a>
+                  </div>
+                  <div class="text-right" ng-if="vm.appointment.client.id">
+                    <a class="text-underline text-danger" ng-click="vm.clearClient()">
+                      <b>Trocar paciente</b>
+                    </a>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.phone_number.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Telefone: </label>
+                <div class="col-sm-8">
+		              <div class="input-group">
+		                <span class="input-group-addon" id="phone_number-addon">
+		                  <i class="fa fa-phone"></i>
+		                </span>
+		                <input type="text" name="phone_number" ng-model="vm.appointment.client.phone_number" class="form-control" autocomplete="off" 
+		                  ui-mask="(99) ?99999-9999" model-view-value="true" aria-describedby="phone_number-addon" required>
+		              </div>
+                  <div ng-messages="form.phone_number.$error" role="alert" class="help-block" ng-if="form.phone_number.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.phone_number.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Lembrete: </label>
+                <div class="col-sm-8">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="notify_client" ng-model="vm.appointment.notify_client" ng-disabled="vm.appointment.id" ng-false-value="false" ng-true-value="true"> Quero enviar lembrete SMS
+                    </label>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.email_notification.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Enviar e-mail: </label>
+                <div class="col-sm-8">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" name="email_notification" ng-model="vm.appointment.email_notification" ng-disabled="vm.appointment.id" ng-false-value="false" ng-true-value="true"> Quero enviar email de confirmação
+                    </label>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.email.$invalid && form.$submitted }" ng-if="vm.appointment.email_notification">
+                <label class="col-sm-4 control-label">E-mail do paciente: </label>
+                <div class="col-sm-8">
+		              <div class="input-group">
+		                <span class="input-group-addon" id="email-addon">
+		                  <i class="fa fa-envelope"></i>
+		                </span>
+		                <input type="text" name="email" ng-model="vm.appointment.client.email" class="form-control" autocomplete="off" aria-describedby="email-addon" required>
+		              </div>
+                  <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="form.email.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group">
+                <label class="col-sm-4 control-label">Anotações: </label>
+                <div class="col-sm-8">
+                	<textarea class="form-control" id="note" name="note" ng-model="vm.appointment.note" rows="3" placeholder="Opcional"></textarea>
+        				</div>
+        			</div>
+        		</div>
+        		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        			<div class="form-group" ng-class="{ 'has-error': form.account.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Dentista: </label>
+                <div class="col-sm-8">
+		              <div class="input-group">
+		                <span class="input-group-addon" id="account">
+		                  <i class="fa fa-user-md"></i>
+		                </span>
+                		<select class="form-control" name="account" ng-model="vm.appointment.account_id" ng-change="vm.changeDoctor()" required>
+	                  	<option ng-value="null" disabled>&#8212;Selecione um Dentista&#8212;</option>
+	                    <option ng-repeat="option in vm.accountList" ng-value="option.id">
+	                      {{ option.full_name }}
+	                    </option>
+                		</select>
+		              </div>
+                  <div ng-messages="form.account.$error" role="alert" class="help-block" ng-if="form.account.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group">
+                <label class="col-sm-4 control-label">Serviços: </label>
+                <div class="col-sm-8">
+                	<select class="form-control" id="service" name="service" ng-model="vm.appointment.service_id" ng-change="vm.changeService()">
+                  	<option ng-value="null" disabled>&#8212;Selecione um serviço/produto&#8212;</option>
+                    <option ng-repeat="option in vm.serviceList" ng-value="option.id">
+                      {{ option.title }}&nbsp;-&nbsp;{{ option.amount | currency : 'R$' : 2 }}
+                    </option>
+                	</select>
+                	<div ng-repeat="service in vm.appointment.additional_services" class="m-t-xxs services" ng-if="vm.appointment.service_id">
+										<div class="input-group">
+                			<select class="form-control" ng-model="service.value" ng-change="vm.changeService()" 
+                				ng-options="option as option.title for option in service.lingers">
+                			</select>
+										  <span class="input-group-btn">
+										    <button class="btn btn-danger" type="button" ng-click="vm.removeAdditionalService(service)">
+													<i class="fa fa-trash"></i>
+										    </button>
+										  </span>
+										</div>
+                	</div>
+                	<div class="m-t-xxs text-center" ng-if="vm.appointment.service_id">
+										<button class="btn btn-primary btn-sm" type="button" ng-click="vm.addAdditionalService()">Adicionar mais serviço</button>
+                	</div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.hours.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Horário da Consulta: </label>
+                <div class="col-sm-8">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-right: 0px;">
+                      <select class="form-control" name="hours" id="hours" ng-model="vm.appointment.hours" ng-change="vm.changeStartTime()" required style="display: inline-block;width: auto;margin-right: 10px;">
+                        <option ng-value="null" disabled>&#8212;</option>
+                        <option ng-repeat="value in vm.rangeHours track by $index" ng-value="value">{{value}}</option>
+                      </select>
+                      <span>Horas</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="padding-left: 0px;">
+                      <select class="form-control" name="minutes" id="minutes" ng-model="vm.appointment.minutes" ng-change="vm.changeStartTime()" required style="display: inline-block;width: auto;margin-left: 10px;">
+                        <option ng-value="null" disabled>&#8212;</option>
+                        <option ng-repeat="value in vm.rangeMinutes track by $index" ng-value="value">{{value}}</option>
+                      </select>
+                      <span>Minutos</span>
+                    </div>
+                  </div>
+                  <div ng-messages="form.hours.$error" role="alert" class="help-block" ng-if="form.hours.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        			<div class="form-group" ng-class="{ 'has-error': form.duration_time.$invalid && form.$submitted }">
+                <label class="col-sm-4 control-label">Tempo da Consulta: </label>
+                <div class="col-sm-8">
+                  <select class="form-control" name="duration_time" ng-model="vm.appointment.duration_time" ng-change="vm.changeOnlyDurationTime()" required>
+                  	<option ng-value="null" disabled>&#8212;Selecione o tempo&#8212;</option>
+                    <option ng-repeat="option in vm.duration_times" ng-value="option.id">
+                      {{ option.value }}
+                    </option>
+                  </select>
+                  <div ng-messages="form.duration_time.$error" role="alert" class="help-block" ng-if="form.duration_time.$invalid && form.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+      </uib-tab>
+      <uib-tab index="1">
+        <uib-tab-heading>
+          <i class="fa fa-cancel fa-lg"></i> Bloquear Horários
+        </uib-tab-heading>
+        <div class="p-h-xs p-v-xs">
+        </div>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-primary" type="submit" ng-if="vm.appointment.id">Atualizar Consulta</button>
+    <button class="btn btn-success" type="submit" ng-if="!vm.appointment.id">Salvar Consulta</button>
+  </div>
+</form>

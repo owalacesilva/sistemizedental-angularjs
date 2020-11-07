@@ -1,0 +1,88 @@
+<div id="page-login">
+  <div class="container">  
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <a href="/">
+          <img src="assets/img/icon-logo-horizontal.svg" alt="Logo" style="max-height: 80px;padding: 10px 0px;">
+        </a>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-body no-s">
+        <div class="row no-s">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-form p-h-md p-v-md">
+            <form ng-submit="vm.submit(form.$valid)" novalidate role="form" class="form" name="form">
+              <fieldset>
+                <legend>Entre agora</legend>
+                <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && (form.email.$dirty || form.$submitted) }">
+                  <label for="email" class="control-label">E-mail</label>
+                  <input ng-model="vm.email" type="email" name="email" class="form-control" autocomplete="true" autofocus="autofocus" required />
+                  <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="(form.email.$dirty || form.$submitted)">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && (form.password.$dirty || form.$submitted) }">
+                  <label for="password" class="control-label">Senha</label> 
+                  <div class="input-group">
+                    <input ng-model="vm.password" type="{{ vm.pwdVisible ? 'text' : 'password' }}" name="password" class="form-control" autocomplete="true" current-password required />
+                    <span class="input-group-addon">
+                      <a href="javascript:;" class="font-weight-bold none-decoration" ng-click="vm.pwdVisible = !vm.pwdVisible">
+                        {{ vm.pwdVisible ? 'Esconder' : 'Mostrar' }}
+                      </a>
+                    </span>
+                  </div>
+                  <div ng-messages="form.password.$error" role="alert" class="help-block" ng-if="(form.password.$dirty || form.$submitted)">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+                <div class="form-group text-left">
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <a target="_blank" ng-href="{{ $root.url_paths.forgot_password_path }}" title="Redefinir senha" class="btn btn-link">Esqueceu sua senha?</a>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
+                      <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group text-center">
+                  <h4>Conheça nossa plataforma<br>Participe por 7 dias grátis!</h4>
+                  <a target="_blank" ng-href="{{ $root.url_paths.sign_up_path }}" class="btn btn-link btn-lg">Clique para cadastrar</a>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-mkt text-center hidden-xs hidden-sm">
+            <h4 style="color: #fff;">Use o Sistemize Dental<br>no seu smartphone!</h4>
+            <img src="assets/img/desktop-mobile.png" style="max-width: 100%;">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="p-v-xs hidden-xs hidden-sm">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-left">
+          <p>© 2016 Sistemize Dental. Todos os direitos reservados.</p>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 text-right">
+          <ul class="list-unstyled list-inline">
+            <li><a target="_blank" ng-href="{{ $root.url_paths.private_policy_path }}">Política de Privacidade</a></li>
+            <li>|</li>
+            <li><a target="_blank" ng-href="{{ $root.url_paths.terms_path }}">Termos de Uso</a></li>
+            <li>|</li>
+            <li><a href="javascript:;">Parceiros</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="p-v-xs text-center hidden-md hidden-lg">
+      <p><small>© 2016 Sistemize Dental. Todos os direitos reservados.</small></p>
+      <ul class="list-unstyled list-inline">
+        <li><a target="_blank" ng-href="{{ $root.url_paths.private_policy_path }}">Política de Privacidade</a></li>
+        <li>|</li>
+        <li }}><a target="_blank" ng-href="{{ $root.url_paths.terms_path }}">Termos de Uso</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

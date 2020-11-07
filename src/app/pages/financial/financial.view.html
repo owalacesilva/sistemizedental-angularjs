@@ -1,0 +1,31 @@
+<div class="p-h-xs m-t-xs">
+  <uib-tabset justified="false">
+    <uib-tab index="0" classes="menu-tab" select="vm.select(0)">
+      <uib-tab-heading>
+        <i class="fa fa-exchange fa-rotate-270 fa-lg fa-fw" aria-hidden="true"></i> Extrato
+      </uib-tab-heading>
+    </uib-tab>
+    <uib-tab index="1" classes="menu-tab" select="vm.select(1)">
+      <uib-tab-heading>
+        <i class="fa fa-files-o fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Contas a Pagar</span>
+      </uib-tab-heading>
+    </uib-tab>
+    <uib-tab index="2" classes="menu-tab" select="vm.select(2)">
+      <uib-tab-heading>
+        <i class="fa fa-list fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Histórico de caixas</span>
+      </uib-tab-heading>
+    </uib-tab>
+    <uib-tab index="3" classes="menu-tab" select="vm.select(3)">
+      <uib-tab-heading>
+        <i class="fa fa-credit-card fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Formas de Pagamento</span>
+      </uib-tab-heading>
+    </uib-tab>
+  </uib-tabset>
+</div>
+<div class="p-h-xs no-p-v">
+  <div class="panel">
+    <div class="panel-body no-p-v">
+      <div ui-view></div>
+    </div>
+  </div>
+</div>

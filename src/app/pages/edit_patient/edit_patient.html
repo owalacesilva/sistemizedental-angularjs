@@ -1,0 +1,217 @@
+<div class="p-h-xs p-v-xs">
+  <div class="container-fluid">  
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2 class="panel-title text-center">{{ vm.client.first_name }}</h1>
+          </div>
+          <div class="panel-body">
+            <div class="text-center">
+              <p><ng-letter-avatar data="{{ vm.client.first_name }}" charCount="2"></ng-letter-avatar></p>
+              <h4>Saldo atual</h4>
+              <span style="font-size: 1.6em;">{{ vm.client.balance | currency : 'R$ ' : 2 }}</span>
+              <hr>
+              <h4>Pontos</h4>
+              <span style="font-size: 1.6em;">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-10">
+        <uib-tabset active="0">
+          <uib-tab index="0">
+            <uib-tab-heading>
+              <i class="fa fa-address-book-o fa-lg fa-fw"></i><span class="hidden-xs hidden-sm">&nbsp;Dados do paciente</span>
+            </uib-tab-heading>
+            <div class="panel">
+              <div class="panel-body">        
+                <form name="form" role="form" class="form" ng-submit="vm.submitForm(form.$valid)" novalidate>
+                  <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <fieldset>
+                        <legend>
+                          <i class="fa fa-address-book-o fa-fw"></i> Informações do paciente
+                        </legend>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group" ng-class="{ 'has-error': form.first_name.$invalid && form.$submitted }">
+                              <label for="first_name" class="control-label">Nome</label>
+                              <input type="text" class="form-control" name="first_name" id="first_name" ng-model="vm.client.first_name" required/>
+                              <div ng-messages="form.first_name.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                                <span ng-message="required">Campo obrigatório</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group" ng-class="{ 'has-error': form.last_name.$invalid && (form.last_name.$dirty || form.$submitted) }">
+                              <label for="last_name" class="control-label">Sobrenome</label>
+                              <input type="text" class="form-control" name="last_name" id="last_name" ng-model="vm.client.last_name" />
+                            </div>
+                          </div>
+                          <!--<div class="col-lg-6">
+                            <div class="form-group" ng-class="{ 'has-error': form.cpf.$invalid && form.$submitted }">
+                              <label for="cpf" class="control-label">CPF</label>
+                              <input type="text" class="form-control" name="cpf" id="cpf" ng-model="vm.client.cpf" ui-mask="999.999.999-99" model-view-value="false" required/>
+                              <div ng-messages="form.cpf.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                                <span ng-message="required">Campo obrigatório</span>
+                              </div>
+                            </div>
+                          </div>-->
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group" ng-class="{ 'has-error': form.phone_number.$invalid && form.$submitted }">
+                              <label for="phone_number" class="control-label">Telefone</label>
+                              <input type="text" class="form-control" name="phone_number" id="phone_number" ng-model="vm.client.phone_number" ui-mask="(99) ?99999-9999" model-view-value="true" required/>
+                              <div ng-messages="form.phone_number.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                                <span ng-message="required">Campo obrigatório</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group" ng-class="{ 'has-error': form.gender.$invalid && form.$submitted }">
+                              <label for="gender" class="control-label">Sexo</label>
+                              <select id="gender" name="gender" class="form-control" ng-model="vm.client.gender"
+                                ng-init="vm.client.gender = (vm.client.gender || vm.genders[0].id)" 
+                                  ng-options="option.id as option.name for option in vm.genders" required></select>
+                              <div ng-messages="form.gender.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                                <span ng-message="required">Campo obrigatório</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label for="email" class="control-label">E-mail</label>
+                              <input type="email" class="form-control" name="email" id="email" ng-model="vm.client.email" />
+                            </div>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="form-group">
+                              <label for="birth_date" class="control-label">Data de Nascimento</label>
+                              <input type="text" class="form-control" id="birth_date" name="birth_date" ng-model="vm.client.birth_date" ui-mask="99/99/9999" model-view-value="true" />
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                      <fieldset>
+                        <legend>
+                          <i class="fa fa-map-marker fa-fw"></i> Endereço do paciente
+                        </legend>
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label class="control-label" for="postal_code">CEP</label>
+                              <input type="text" class="form-control" name="postal_code" ng-model="vm.client.postal_code" ui-mask="99999-999" placeholder="_____-___" model-view-value="true" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label class="control-label" for="street_address">Endereço</label>
+                              <input type="text" class="form-control" name="street_address" ng-model="vm.client.street_address"/>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label class="control-label" for="neighborhood">Bairro</label>
+                              <input type="text" class="form-control" name="neighborhood" ng-model="vm.client.neighborhood"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label class="control-label" for="city">Cidade</label>
+                              <input type="text" class="form-control" name="city" ng-model="vm.client.city"/>
+                            </div>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                              <label class="control-label" for="state">Estado</label>
+                              <select class="form-control" name="state" ng-model="vm.client.state">
+                                <option ng-value="null" disabled>&#8212;Selecione um estado&#8212;</option>
+                                <option ng-value="'AC'">Acre</option>
+                                <option ng-value="'AC'">Acre</option>
+                                <option ng-value="'AL'">Alagoas</option>
+                                <option ng-value="'AP'">Amapá</option>
+                                <option ng-value="'AM'">Amazonas</option>
+                                <option ng-value="'BA'">Bahia</option>
+                                <option ng-value="'CE'">Ceará</option>
+                                <option ng-value="'DF'">Distrito Federal</option>
+                                <option ng-value="'ES'">Espírito Santo</option>
+                                <option ng-value="'GO'">Goiás</option>
+                                <option ng-value="'MA'">Maranhão</option>
+                                <option ng-value="'MT'">Mato Grosso</option>
+                                <option ng-value="'MS'">Mato Grosso do Sul</option>
+                                <option ng-value="'MG'">Minas Gerais</option>
+                                <option ng-value="'PA'">Pará</option>
+                                <option ng-value="'PB'">Paraíba</option>
+                                <option ng-value="'PR'">Paraná</option>
+                                <option ng-value="'PE'">Pernambuco</option>
+                                <option ng-value="'PI'">Piauí</option>
+                                <option ng-value="'RJ'">Rio de Janeiro</option>
+                                <option ng-value="'RN'">Rio Grande do Norte</option>
+                                <option ng-value="'RS'">Rio Grande do Sul</option>
+                                <option ng-value="'RO'">Rondônia</option>
+                                <option ng-value="'RR'">Roraima</option>
+                                <option ng-value="'SC'">Santa Catarina</option>
+                                <option ng-value="'SP'">São Paulo</option>
+                                <option ng-value="'SE'">Sergipe</option>
+                                <option ng-value="'TO'">Tocantins</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">              
+                      <div class="form-group text-right">
+                        <button type="submit" class="btn btn-success">Atualizar dados</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="1">
+            <uib-tab-heading>
+              <i class="fa fa-stethoscope fa-lg fa-fw"></i><span class="hidden-xs hidden-sm">&nbsp;Ficha de Anamnese</span>
+            </uib-tab-heading>
+            <div class="panel">
+              <div class="panel-body">
+                <div ui-view="anamnesis"></div>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="2">
+            <uib-tab-heading>
+              <i class="fa fa-history fa-lg fa-fw"></i><span class="hidden-xs hidden-sm">&nbsp;Histórico de Consultas</span>
+            </uib-tab-heading>
+            <div class="panel">
+              <div class="panel-body">
+                <div ui-view="appointments"></div>
+              </div>
+            </div>
+          </uib-tab>
+          <uib-tab index="3">
+            <uib-tab-heading>
+              <i class="fa fa-list fa-lg fa-fw"></i><span class="hidden-xs hidden-sm">&nbsp;Histórico de Vendas</span>
+            </uib-tab-heading>
+            <div class="panel">
+              <div class="panel-body">
+                <div ui-view="commands"></div>
+              </div>
+            </div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
+    </div>
+  </div>
+</div> 

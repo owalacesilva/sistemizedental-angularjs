@@ -1,0 +1,77 @@
+<div class="panel">
+  <div class="panel-body">
+    <form id="form" name="form" role="form" class="form" novalidate>
+      <fieldset>
+        <legend>
+          Fotos do procedimento dessa consulta
+        </legend>
+        <div class="form-group text-right">
+          <button type="button" class="btn btn-primary" ng-click="vm.addProcedure()">
+            <i class="fa fa-plus fa-fw"></i>Adicionar
+          </button>
+        </div>
+        <div class="container-fluid">
+          <div class="row well well-xs" ng-repeat="item in vm.procedures">
+            <div class="col-lg-4">
+              <div class="form-group">
+                <label class="control-label">Rótulo</label>
+                <input type="text" class="form-control" ng-model="item.title" ng-disabled="item.id"/>
+                <span ng-if="!item.id">Coloque aqui um nome ou título para marcar esse procedimento</span>
+              </div>
+              <div class="form-group">
+                <label class="control-label">Observações</label>
+                <textarea class="form-control" row="3" ng-model="item.annotation" ng-disabled="item.id"></textarea>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p class="text-center"><b>Pé esquerdo</b></p>
+                    <div 
+                      class="attach-photo et-foot"
+                      ngf-select="vm.addPictureLeft(item, $file)"
+                      ngf-accept="'image/*'"
+                      ngf-pattern="'image/*'"
+                      ngf-max-size="20MB" 
+                      ngf-min-height="100">
+                      <img ngf-thumbnail="item.picture_left || item.picture_left_url" />
+                    </div>
+                    <!--<div procedure-photo url-photo-foot="item.picture_left" class="attach-photo et-foot"></div> -->
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <p class="text-center"><b>Pé direito</b></p>
+                    <div 
+                      class="attach-photo et-foot"
+                      ngf-select="vm.addPictureRight(item, $file)"
+                      ngf-accept="'image/*'"
+                      ngf-pattern="'image/*'"
+                      ngf-max-size="20MB" 
+                      ngf-min-height="100">
+                      <img ngf-thumbnail="item.picture_right || item.picture_right_url" />
+                    </div>
+                    <!--<div procedure-photo url-photo-foot="item.picture_right" class="attach-photo et-foot"></div>-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-10 m-t-sm">
+              <div class="text-right">
+                <button type="button" class="btn btn-danger" ng-click="vm.removeProcedure(item)">
+                  <i class="fa fa-trash fa-lg fa-fw"></i> Deletar
+                </button>
+                <button type="button" class="btn btn-success" ng-if="!item.id" ng-click="vm.saveProcedure(item)">
+                  <i class="fa fa-send fa-lg fa-fw"></i> Salvar<span class="hidden-sm hidden-xs">&nbsp;registro</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div ng-if="!vm.procedures.length" class="text-center">
+            <h3><i class="fa fa-search fa-fw"></i> Nenhum procedimento encontrado</h3>
+            <span>Adicione acima um novo procedimento para marcar essa appointmenta</span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

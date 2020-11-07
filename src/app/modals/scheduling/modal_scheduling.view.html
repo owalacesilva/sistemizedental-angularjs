@@ -1,0 +1,104 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">Fechar</button>
+  <h4 class="modal-title">Agendamento</h4>
+</div>
+<div class="modal-body" style="min-height: 320px;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+        <div ng-if="vm.appointment.status == 'created'">
+          <button type="button" ng-click="vm.edit()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-files-o"></i> Reagendar
+          </button>
+          <button type="button" ng-click="vm.arrive()" class="btn btn-success btn-block m-b-xxs">
+            <i class="fa fa-fw fa-thumbs-o-up"></i> Paciente Chegou
+          </button>
+          <button type="button" ng-click="vm.missing()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-thumbs-o-down"></i> Paciente Faltou
+          </button>
+          <button type="button" ng-click="vm.cancel()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-times"></i> Cancelar consulta
+          </button>
+          <button type="button" ng-click="vm.remove()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-trash-o"></i> Excluir consulta
+          </button>
+        </div>
+        <div ng-if="vm.appointment.status == 'confirmed'">
+          <button type="button" ng-click="vm.open()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-folder-open-o"></i> Abrir Prontuário
+          </button>
+          <button type="button" ng-click="vm.finish()" class="btn btn-success btn-block m-b-xxs">
+            <i class="fa fa-fw fa-check"></i> Encerrar Consulta
+          </button>
+          <button type="button" ng-click="vm.edit()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-files-o"></i> Reagendar
+          </button>
+          <button type="button" ng-click="vm.cancel()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-times"></i> Cancelar consulta
+          </button>
+          <button type="button" ng-click="vm.remove()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-trash-o"></i> Excluir consulta
+          </button>
+        </div>
+        <div ng-if="vm.appointment.status == 'canceled'">
+          <button type="button" ng-click="vm.open()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-folder-open-o"></i> Abrir Prontuario
+          </button>
+          <button type="button" ng-click="vm.remove()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-trash-o"></i> Excluir consulta
+          </button>
+        </div>
+        <div ng-if="vm.appointment.status == 'missed'">
+          <button type="button" ng-click="vm.open()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-folder-open-o"></i> Abrir Prontuario
+          </button>
+          <button type="button" ng-click="vm.remove()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-trash-o"></i> Excluir consulta
+          </button>
+        </div>
+        <div ng-if="vm.appointment.status == 'finished'">
+          <button type="button" ng-click="vm.open()" class="btn btn-primary btn-block m-b-xxs">
+            <i class="fa fa-fw fa-folder-open-o"></i> Abrir Prontuario
+          </button>
+          <button type="button" ng-click="vm.remove()" class="btn btn-danger btn-block m-b-xxs">
+            <i class="fa fa-fw fa-trash-o"></i> Excluir consulta
+          </button>
+        </div>
+        <button type="button" ng-click="vm.prescription()" class="btn btn-default btn-block m-b-xxs">
+          <i class="fa fa-fw fa-send"></i> Emitir Receita
+        </button>
+      </div>
+      <div class="col-lg-8">
+        <table class="table">       
+          <tr>
+            <th width="30%">Dentista</th>
+            <td>{{ vm.appointment.account.full_name }}</td>
+          </tr>
+          <tr>
+            <th width="30%">Paciente</th>
+            <td>
+              <p class="no-m" ng-bind="vm.appointment.client.full_name"></p>
+              <p class="no-m" ng-bind="vm.appointment.client.phone_number"></p>
+            </td>
+          </tr>
+          <tr>
+            <th width="30%">Situação</th>
+            <td>
+              <div ng-switch on="vm.appointment.status">
+                <span class="label label-success" ng-switch-when="created">Consulta agendada</span>
+                <span class="label label-primary" ng-switch-when="confirmed">Confirmado</span>
+                <span class="label label-primary" ng-switch-when="arrived">Em andamento</span>
+                <span class="label label-danger" ng-switch-when="canceled">Consulta cancelada</span>
+                <span class="label label-default" ng-switch-when="finished">Consulta encerrada</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th width="30%">Data</th>
+            <td>{{ vm.formatted_date }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

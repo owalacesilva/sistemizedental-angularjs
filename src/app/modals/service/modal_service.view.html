@@ -1,0 +1,112 @@
+<form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Criar novo serviço
+      <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+        <fieldset>
+          <legend>
+            Informações do serviço
+          </legend>
+          <p>Informações pertinentes ao cadastro do serviço</p>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+              <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+                <label for="title" class="control-label">Nome do serviço</label>
+                <input type="text" class="form-control" name="title" id="title" ng-model="vm.service.title" required/>
+                <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                  <span ng-message="required">Campo obrigatório</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+              <div class="form-group" ng-class="{ 'has-error': form.category.$invalid && form.$submitted }">
+                <label for="title" class="control-label">Categoria</label>
+                <select ng-if="!vm.toggle_category" class="form-control" name="category" ng-model="vm.service.category_id">
+                  <option value disabled>&#8212;Selecione uma categoria&#8212;</option>
+                  <option ng-repeat="category in vm.categories" ng-value="category.id">{{category.title}}</option>
+                </select>
+                <input ng-if="vm.toggle_category" type="text" name="category_title" class="form-control m-b-sm" ng-model="vm.service.category.title" placeholder="Nome da Categoria" />
+                <div ng-switch on="vm.toggle_category">
+                  <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="false" class="display-inline m-t-xxs">
+                    <i class="fa fa-plus"></i> Novo Categoria
+                  </a>
+                  <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="true" class="display-inline m-t-xxs text-danger">
+                    <i class="fa fa-ban"></i> Voltar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+              <div class="form-group" ng-class="{ 'has-error': form.amount.$invalid && form.$submitted }">
+                <label for="amount" class="control-label">Custo do serviço</label>
+                <div class="input-group">
+                  <span class="input-group-addon">R$</span>
+                  <input type="text" class="form-control" name="amount" id="amount" ng-model="vm.service.amount" ui-money-mask="2" required>
+                </div>
+                <div ng-messages="form.amount.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+              <div class="form-group" ng-class="{ 'has-error': form.duration_time.$invalid && form.$submitted }">
+                <label for="duration_time" class="control-label">Tempo de Atendimento</label>
+                <!-- <div class="row">
+                  <div class="col-lg-5">
+                    <select class="form-control" name="hours" id="hours" ng-model="vm.service.hours" string-to-number required>
+                      <option  ng-repeat="n in [].constructor(5) track by $index" value="{{$index}}">{{$index | number:0}} Horas</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-7">
+                    <select class="form-control" name="minutes" id="minutes" ng-model="vm.service.minutes" string-to-number required>
+                      <option  ng-repeat="n in [].constructor(60) track by $index" value="{{$index}}">{{$index | number:0}} Minutos</option>
+                    </select>
+                  </div>
+                </div>-->
+                <select class="form-control" name="duration_time" id="duration_time" ng-model="vm.service.duration_time" required 
+                  ng-options="option.id as option.value for option in vm.durations">
+                  <option value>Selecione o Tempo</option>
+                </select>
+                <div ng-messages="form.duration_time.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+            <label for="description" class="control-label">Descrição do serviço</label><br/>
+            <textarea name="description" id="description" ng-model="vm.service.description" class="form-control" rows="5"></textarea>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+        <fieldset>
+          <legend>
+            Opções avançadas
+          </legend>
+          <p>Opções avançadas para definição do serviço</p>
+          <div class="form-group">
+            <label for="telephone" class="control-label">Permite agendamento de retornos</label><br/>
+            <label class="radio-inline">
+              <input type="radio" name="allows_return" ng-model="vm.service.allows_return" ng-value-true="'1'" value="1"> Sim
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="allows_return" ng-model="vm.service.allows_return" ng-value-false="'0'" value="0"> Não
+            </label>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-success" type="submit">Salvar</button>
+  </div>
+</form>

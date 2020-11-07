@@ -1,0 +1,70 @@
+<form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+  <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">Fechar</button>
+    <h4 class="modal-title">Emitir prescrição</h4>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-lg-7">
+        <div ng-repeat="medicine in vm.prescription.medicines" class="m-b-xxs">
+          <div class="row m-b-xs">
+            <div class="col-lg-7">
+              <label class="control-label">Medicamento</label>
+              <select class="form-control" ng-model="medicine.product_id" required>
+                <option value disabled>&#8212;Selecione um serviço&#8212;</option>
+                <option ng-repeat="option in vm.products" ng-value="option.id">
+                  {{ option.title }}
+                </option>
+              </select>
+            </div>
+            <div class="col-lg-3">
+              <label class="control-label">Quant/uso</label>
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="medicine.quantity" required />
+                <span class="input-group-addon">mg</span>
+              </div>
+            </div>
+            <div class="col-lg-2 text-center">
+              <label class="control-label">&nbsp;</label><br />
+              <a href="" class="text-danger">
+                <i class="fa fa-times fa-fw fa-lg"></i> <span>Remover</span>
+              </a>
+            </div>
+          </div>
+          <textarea rows="2" class="form-control" ng-model="medicine.note" maxlength="100" placeholder="Como usar"></textarea>
+        </div>
+        <div class="text-right">
+          <button type="button" class="btn btn-default" ng-click="vm.prescription.medicines.push({})">
+            <i class="fa fa-plus fa-fw"></i> Medicamento
+          </button>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div class="form-group">
+          <label for="email" class="control-label">Nome do Paciente:</label><br />
+          <span>{{ vm.patient.first_name }}</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && form.$submitted }">
+          <label for="email" class="control-label">Enviar para o e-mail:</label>
+          <input type="email" class="form-control" name="email" ng-model="vm.prescription.email" />
+          <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.annotations.$invalid && form.$submitted }">
+          <label for="annotations" class="control-label">Observações ao paciente</label>
+          <textarea rows="4" class="form-control" name="annotations" ng-model="vm.prescription.annotations" maxlength="144"></textarea>
+          <div ng-messages="form.annotations.$error" role="alert" class="help-block" ng-if="form.$submitted">
+            <small ng-message="required">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer text-left">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-success" type="submit">
+      <i class="fa fa-send fa-fw"></i> Emitir Receita
+    </button>
+  </div>
+</form>

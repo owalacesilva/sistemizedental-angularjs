@@ -1,0 +1,64 @@
+<div class="p-v-xs">          
+  <form role="form" class="form" ng-submit="vm.refresh()">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <label for="date_start" class="control-label">
+            <i class="fa fa-calendar fa-lg fa-fw"></i> Data inicial
+          </label>
+          <input type="date" id="date_start" name="date_start" ng-model="vm.date_start" class="form-control" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <label for="date_end" class="control-label">
+            <i class="fa fa-calendar fa-lg fa-fw"></i> Data final
+          </label>
+          <input type="date" id="date_end" name="date_end" ng-model="vm.date_end" class="form-control" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <label for="date_start" class="control-label">
+            <i class="fa fa-exchange fa-rotate-90 fa-lg fa-fw"></i> Movimentação:&nbsp;
+          </label>
+          <select id="type" name="type" class="form-control" ng-model="vm.type">
+            <option ng-value="null">Todas as movimentações</option>
+            <option ng-value="1">Comandas</option>
+            <option ng-value="2">Retiradas do caixa</option>
+            <option ng-value="3">Contas á Pagar</option>
+            <option ng-value="4">Contas á Receber</option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <label for="date_start" class="control-label">
+            <i class="fa fa-check-circle fa-lg fa-fw"></i> Pagamentos:&nbsp;
+          </label>
+          <select id="paid" name="paid" class="form-control" ng-model="vm.paid">
+            <option ng-value="null">Todos</option>
+            <option ng-value="1">Realizados</option>
+            <option ng-value="0">Não realizados</option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <label>&nbsp;</label><br>
+          <button type="submit" class="btn btn-success">
+            <i class="fa fa-search fa-fw"></i> Buscar
+          </button>&nbsp;
+          <button type="button" class="btn btn-default">Limpar</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2 p-h-xxs m-b-xxs">
+          <span uib-dropdown on-toggle="vm.toggled(open)">
+            <a href id="daterange-dropdown" class="btn btn-link no-p-h" uib-dropdown-toggle>
+              Exibir resultados de: <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="daterange-dropdown">
+              <li ng-repeat="period in vm.periods" ng-click="vm.selectPeriod($index)">
+                <a href>{{period.label}}</a>
+              </li>
+            </ul>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+  <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover display" cellspacing="0" width="100%"></table>
+</div>

@@ -1,0 +1,59 @@
+<form id="form" name="form" role="form" class="form-horizontal" ng-submit="vm.submit(form)" novalidate>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Adicionar novo produto
+      <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">&times;</button>
+    </h3>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+      <label for="title" class="col-lg-4 control-label">Nome do produto</label>
+      <div class="col-lg-8">      
+        <input type="text" class="form-control" name="title" id="title" ng-model="vm.product.title" maxlength="36" required/>
+        <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.title.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.category.$invalid && form.$submitted }">
+      <label class="col-sm-4 control-label">Categoria: </label>
+      <div class="col-sm-6">
+        <select ng-if="!vm.toggle_category" class="form-control" name="category" ng-model="vm.product.category_id">
+          <option value disabled>&#8212;Selecione uma categoria&#8212;</option>
+          <option ng-repeat="category in vm.categories" ng-value="category.id">{{category.title}}</option>
+        </select>
+        <input ng-if="vm.toggle_category" type="text" name="category_title" class="form-control m-b-sm" ng-model="vm.product.category.title" placeholder="Nome da Categoria" />
+      </div>
+      <div class="col-lg-2 no-p-h" ng-switch on="vm.toggle_category">
+        <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="false" class="display-block m-t-xxs">
+          <i class="fa fa-plus"></i> Adicionar
+        </a>
+        <a ng-click="vm.toggle_category = !vm.toggle_category" ng-switch-when="true" class="display-block m-t-xxs text-danger">
+          <i class="fa fa-ban"></i> Cancelar
+        </a>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.price.$invalid && form.$submitted }">
+      <label for="price" class="col-lg-4 control-label">Preço para revenda</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" name="price" id="price" ng-model="vm.product.price" ui-money-mask="2" required/>
+        <div ng-messages="form.price.$error" role="alert" class="help-block" ng-if="form.price.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.amount.$invalid && form.$submitted }">
+      <label for="amount" class="col-lg-4 control-label">Preço de custo</label>
+      <div class="col-lg-8">
+        <input type="text" class="form-control" name="amount" id="amount" ng-model="vm.product.amount" ui-money-mask required/>
+        <div ng-messages="form.amount.$error" role="alert" class="help-block" ng-if="form.amount.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer text-left">
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-success" type="submit">Salvar produto</button>
+  </div>
+</form>

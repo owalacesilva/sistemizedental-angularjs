@@ -1,0 +1,231 @@
+<div class="p-h-xs p-v-xs">
+  <ul class="nav nav-pills">
+    <li role="presentation">
+      <a ui-sref="app.marketplace.analytics" title="Resumo da Loja">Resumo da Loja</a>
+    </li>
+    <li role="presentation">
+      <a ui-sref="app.marketplace.products" title="Lista de Produtos">Lista de Produtos</a>
+    </li>
+    <li role="presentation">
+      <a ui-sref="app.marketplace.settings" title="Configurações da Loja">Configurações da Loja</a>
+    </li>
+  </ul>
+  <hr/>
+  <div class="panel">
+    <div class="panel-heading">
+      <h3 class="panel-title">Cadastro de Produtos</h3>
+      <span>Formulário para cadastro de novos produtos para loja online</span>
+    </div>
+    <div class="panel-body">
+      <form name="form" role="form" class="form" ng-submit="vm.onSubmit(form.$valid)" novalidate>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <fieldset>
+              <legend>
+                <i class="fa fa-product-hunt fa-fw"></i> Detalhes do produto
+              </legend>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+                    <label for="title" class="control-label">Nome do Produto</label>
+                    <input type="text" class="form-control" name="title" id="title" ng-model="vm.shop_product.title" required maxlength="45" />
+                    <div ng-messages="form.title.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <span ng-message="required">Campo obrigatório</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.category.$invalid && form.$submitted }">
+                    <label for="category" class="control-label">Categoria do Produto</label>
+                    <select ng-if="!vm.toggle_category" class="form-control" name="category" ng-model="vm.shop_product.category_id" required>
+                      <option value disabled>&#8212;Selecione uma categoria&#8212;</option>
+                      <option ng-repeat="category in vm.categories" ng-value="category.id">{{category.title}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.price.$invalid && form.$submitted }">
+                    <label for="price" class="control-label">Preço</label>
+                    <input type="text" class="form-control" name="price" id="price" ng-model="vm.shop_product.price" ui-money-mask required/>
+                    <div ng-messages="form.price.$error" role="alert" class="help-block" ng-if="form.price.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.discount_price.$invalid && form.$submitted }">
+                    <label for="discount_price" class="control-label">Preço com desconto (Final)</label>
+                    <input type="text" class="form-control" name="discount_price" id="discount_price" ng-model="vm.shop_product.discount_price" ui-money-mask="2"/>
+                    <div ng-messages="form.discount_price.$error" role="alert" class="help-block" ng-if="form.discount_price.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.brand.$invalid && form.$submitted }">
+                    <label for="brand" class="control-label">Marca</label>
+                    <input type="text" class="form-control" name="brand" id="brand" ng-model="vm.shop_product.brand" required/>
+                    <div ng-messages="form.brand.$error" role="alert" class="help-block" ng-if="form.brand.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.manufacturer.$invalid && form.$submitted }">
+                    <label for="manufacturer" class="control-label">Fabricante</label>
+                    <input type="text" class="form-control" name="manufacturer" id="manufacturer" ng-model="vm.shop_product.manufacturer" />
+                    <div ng-messages="form.manufacturer.$error" role="alert" class="help-block" ng-if="form.manufacturer.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.modeling.$invalid && form.$submitted }">
+                    <label for="modeling" class="control-label">Modelo</label>
+                    <input type="text" class="form-control" name="modeling" id="modeling" ng-model="vm.shop_product.modeling" required/>
+                    <div ng-messages="form.modeling.$error" role="alert" class="help-block" ng-if="form.model.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-sm-6 col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.quantity.$invalid && form.$submitted }">
+                    <label for="quantity" class="control-label">Quantidade disponivel</label>
+                    <input type="number" class="form-control" name="quantity" id="quantity" ng-model="vm.shop_product.quantity" min="1" max="10000" required/>
+                    <div ng-messages="form.quantity.$error" role="alert" class="help-block" ng-if="form.quantity.$invalid && form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form.description.$invalid && form.$submitted }">
+                <label for="description" class="control-label">Descrição do produto</label><br/>
+                <small>Caracteristicas do produto</small>
+                <textarea name="description" id="description" ng-model="vm.shop_product.description" class="form-control" rows="5" required></textarea>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <i class="fa fa-map-marker fa-fw"></i> Endereço (Opicional)
+              </legend>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label" for="postal_code">CEP</label>
+                    <input type="text" class="form-control" name="postal_code" ng-model="vm.shop_product.postal_code" ui-mask="99999-999" placeholder="_____-___" model-view-value="true" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label" for="street_address">Endereço</label>
+                    <input type="text" class="form-control" name="street_address" ng-model="vm.shop_product.street_address"/>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label" for="neighborhood">Bairro</label>
+                    <input type="text" class="form-control" name="neighborhood" ng-model="vm.shop_product.neighborhood"/>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label" for="city">Cidade</label>
+                    <input type="text" class="form-control" name="city" ng-model="vm.shop_product.city"/>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="control-label" for="state">Estado</label>
+                    <select class="form-control" name="state" ng-model="vm.shop_product.state">
+                      <option ng-value="null" disabled>&#8212;Selecione um estado&#8212;</option>
+                      <option ng-value="'AC'">Acre</option>
+                      <option ng-value="'AC'">Acre</option>
+                      <option ng-value="'AL'">Alagoas</option>
+                      <option ng-value="'AP'">Amapá</option>
+                      <option ng-value="'AM'">Amazonas</option>
+                      <option ng-value="'BA'">Bahia</option>
+                      <option ng-value="'CE'">Ceará</option>
+                      <option ng-value="'DF'">Distrito Federal</option>
+                      <option ng-value="'ES'">Espírito Santo</option>
+                      <option ng-value="'GO'">Goiás</option>
+                      <option ng-value="'MA'">Maranhão</option>
+                      <option ng-value="'MT'">Mato Grosso</option>
+                      <option ng-value="'MS'">Mato Grosso do Sul</option>
+                      <option ng-value="'MG'">Minas Gerais</option>
+                      <option ng-value="'PA'">Pará</option>
+                      <option ng-value="'PB'">Paraíba</option>
+                      <option ng-value="'PR'">Paraná</option>
+                      <option ng-value="'PE'">Pernambuco</option>
+                      <option ng-value="'PI'">Piauí</option>
+                      <option ng-value="'RJ'">Rio de Janeiro</option>
+                      <option ng-value="'RN'">Rio Grande do Norte</option>
+                      <option ng-value="'RS'">Rio Grande do Sul</option>
+                      <option ng-value="'RO'">Rondônia</option>
+                      <option ng-value="'RR'">Roraima</option>
+                      <option ng-value="'SC'">Santa Catarina</option>
+                      <option ng-value="'SP'">São Paulo</option>
+                      <option ng-value="'SE'">Sergipe</option>
+                      <option ng-value="'TO'">Tocantins</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <fieldset ng-if="vm.shop_product.id">
+              <legend>
+                <i class="fa fa-camera fa-fw"></i> Images do Produto
+              </legend>
+              <div>
+                <ul class="list-styled list-inline">
+                  <li class="text-center form-group" ng-repeat="url in vm.shop_product.images_url track by $index">
+                    <div class="m-b-sm" style="display:flex;align-items:center;justify-content:center;overflow: hidden;width:120px;height:120px;border: solid 2px #aaa;text-align: center;">
+                      <img ngf-thumbnail="url" style="max-width:100%;max-height:100%;" />
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <strong>DELETAR IMAGEM</strong>
+                    </button>
+                  </li>
+                  <li class="text-center form-group" ng-if="vm.shop_product.images_url.length <= 5">
+                    <div class="m-b-sm">
+                      <img width="120px" height="120px" />
+                    </div>
+                    <button 
+                      type="button"
+                      class="btn btn-default btn-sm"
+                      ngf-select="vm.onSubmitImages($file)"
+                      ngf-accept="'image/*'"
+                      ngf-pattern="'image/*'"
+                      ngf-max-size="20MB" 
+                      ngf-min-height="100">
+                      <strong>ADICIONAR IMAGEM</strong>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <hr/>
+            <div class="form-group">
+              <button type="submit" class="btn btn-success">Adicionar Produto</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

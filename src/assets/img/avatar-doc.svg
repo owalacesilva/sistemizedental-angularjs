@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>- placeholder-dr</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="25" cy="25" r="25"></circle>
+        <ellipse id="path-3" cx="52" cy="30" rx="52" ry="30"></ellipse>
+    </defs>
+    <g id="elementos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="--placeholder-dr" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-69-Copy-4" fill="#8C8883" sketch:type="MSShapeGroup" x="0" y="0" width="100" height="100"></rect>
+            <g id="cabeca" sketch:type="MSLayerGroup" transform="translate(25.000000, 10.000000)">
+                <mask id="mask-2" sketch:name="Mask" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#BAB6AF" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                <circle id="cabeca-copy" fill="#D8D3CC" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="30" cy="20" r="25"></circle>
+            </g>
+            <g id="busto" sketch:type="MSLayerGroup" transform="translate(-2.000000, 64.000000)">
+                <mask id="mask-4" sketch:name="Mask" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <use id="Mask" fill="#FFFFFF" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                <g id="Path-278-Copy-+-Path-278-Copy-2" mask="url(#mask-4)" sketch:type="MSShapeGroup">
+                    <g transform="translate(28.000000, -3.000000)">
+                        <path d="M18.529589,3.95947878 L13.2603859,18.5830052 L16.2750801,22.1484998 L9.5607265,41.3048758 L4.42107807,43.7583689 L5.38911293,2.5534337 L18.529589,3.95947878 Z" id="Path-278-Copy" opacity="0.8" fill="#BAB6AF" transform="translate(11.475334, 23.155901) scale(-1, 1) rotate(10.000000) translate(-11.475334, -23.155901) "></path>
+                        <path d="M20.529589,2.95947878 L14.8457693,18.5019238 L18.2750801,21.1484998 L11.5607265,40.3048758 L6.42107807,42.7583689 L7.38911293,1.5534337 L20.529589,2.95947878 Z" id="Path-278-Copy-3" fill="#EDEAE4" transform="translate(13.475334, 22.155901) scale(-1, 1) rotate(10.000000) translate(-13.475334, -22.155901) "></path>
+                        <path d="M13.9726562,1.08203125 L36.2226562,1.26757812 L26.0927734,41.4619141 L22.6298828,40.7207031 L13.9726562,1.08203125 Z" id="Path-280" fill="#D8D3CC"></path>
+                        <path d="M42.5789219,2.95947878 L36.8951022,18.5019238 L40.324413,21.1484998 L33.6100594,40.3048758 L28.470411,42.7583689 L29.4384458,1.5534337 L42.5789219,2.95947878 Z" id="Path-278-Copy-4" fill="#EDEAE4" transform="translate(35.524666, 22.155901) rotate(10.000000) translate(-35.524666, -22.155901) "></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,199 @@
+<form name="form_order" role="form" class="form-horizontal" ng-submit="vm.validate(form_order)" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title">Vendas e Serviços</h3>
+  </div>
+  <div class="modal-body no-p-h">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-7">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Informações do Paciente</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="col-sm-4 control-label no-p-h">Data:</label>
+                <div class="col-sm-8">
+                  <input type="date" class="form-control" id="date" name="reference_date" ng-model="vm.order.reference_date" style="max-width: 160px;" required/>
+                </div>
+              </div>
+        			<div class="form-group" ng-class="{ 'has-error': form_order.client.$invalid && form_order.$submitted }">
+                <label class="col-sm-4 control-label">Nome do Paciente: </label>
+                <div class="col-sm-8">
+                  <div class="input-group">
+                    <input type="text" name="client" ng-model="vm.order.client.full_name" class="form-control" autocomplete="off" 
+                      uib-typeahead="client as client.full_name for client in vm.getClients($viewValue) | limitTo:10" 
+                        typeahead-loading="vm.loading_clients" typeahead-no-results="vm.no_results" typeahead-on-select="vm.selectClient($item, $model, $label, $event)"  
+                          typeahead-show-hint="true" typeahead-min-length="3" placeholder="Buscar por nome do paciente" required />
+                    <span class="input-group-addon text-danger" ng-style="{ 'color': vm.order.client.balance > -1 ? 'green' : 'red' }">
+                      {{ vm.order.client.balance | currency : 'R$ ' : 2 }}
+                    </span>
+                    <span ng-if="vm.order.client.balance < 0">(Dívida)</span>
+                    <span ng-if="vm.order.client.balance > 0">(Crédito)</span>
+                  </div>
+                  <div ng-messages="form_order.client.$error" role="alert" class="help-block" ng-if="form_order.client.$invalid && form_order.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                  <div class="pull-left" ng-if="vm.order.client.id">
+                    <a class="text-underline" ui-sref="app.clients.edit({ id: vm.order.client.id })">Ver seu cadastro</a>
+                  </div>
+                  <div class="text-right" ng-if="vm.order.client.id">
+                    <a class="text-underline text-danger" ng-click="vm.clearClient()">
+                      <b>Trocar paciente</b>
+                    </a>
+                  </div>
+        				</div>
+        			</div>
+              <div class="form-group" ng-class="{ 'has-error': form_order.phone_number.$invalid && form_order.$submitted }">
+                <label class="col-sm-4 control-label no-p-h">Telefone: </label>
+                <div class="col-sm-8">
+                  <input type="text" name="phone_number" ng-model="vm.order.client.phone_number" class="form-control" autocomplete="off" ui-mask="(99) ?99999-9999" model-view-value="true" required />
+                  <div ng-messages="form_order.phone_number.$error" role="alert" class="help-block" ng-if="form_order.phone_number.$invalid && form_order.$submitted">
+                    <small ng-message="required">Campo obrigatório</small>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form_order.notes.$invalid && form_order.$submitted }">
+                <label class="col-sm-4 control-label no-p-h">Anotações: </label>
+                <div class="col-sm-8">
+                  <textarea class="form-control" id="notes" name="notes" ng-model="vm.order.notes" rows="3" placeholder="Opcional"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5" style="padding-left: 0px;">
+          <div class="panel panel-default panel-payment">
+            <div class="panel-heading">
+              <h3 class="panel-title">Informações de Pagamento</h3>
+            </div>
+            <div class="panel-body">
+              <div class="form-group" ng-repeat="transaction in vm.order.transactions">
+                <label class="col-sm-4 control-label no-p-h">{{ transaction.title }}:</label>
+                <div class="col-sm-5" style="padding-right: 0px;">
+                  <input type="text" ng-model="transaction.total_amount" class="form-control" ng-change="vm.updateRemainingAmount()" ui-money-mask="2"/>
+                </div>
+                <div class="col-sm-3 no-p-h" ng-if="transaction.has_installments">
+                  <select ng-model="transaction.installments" class="form-control" style="display: inline-block;width: auto;">
+                    <option ng-repeat="inx in [].constructor(transaction.installments_limit + 1) track by $index" ng-if="$index > 0" ng-value="$index">{{$index}}x</option>
+                  </select>
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <label class="col-sm-4 control-label no-p-h">Desconto <i class="fa fa-question-circle-o fa-sm fa-fw" aria-hidden="true" popover-placement="top" uib-popover="Desconto sobre o valor total da comanda"  popover-trigger="'mouseenter'"></i>:</label>
+                <div class="col-sm-5" style="padding-right: 0px;">
+                  <input type="text" class="form-control" id="discount" name="discount" ng-model="vm.order.discount" ng-change="vm.updateDiscount()" ui-money-mask="2" ng-disabled="vm.order.change <= 0" />
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer text-right">
+              <strong ng-if="vm.order.remaining_amount < 0">Resta à Pagar:&nbsp;</strong>
+              <strong ng-if="vm.order.remaining_amount >= 0">Troco (Crédito) <i class="fa fa-question-circle-o fa-sm fa-fw" aria-hidden="true" popover-placement="top" uib-popover="Desconto sobre o valor total da comanda"  popover-trigger="'mouseenter'"></i>:&nbsp;</strong>
+              <span ng-class="{ 'text-danger': vm.order.remaining_amount < 0, 'text-success': vm.order.remaining_amount >= 0 }">
+                {{ (vm.order.remaining_amount || 0.0) | currency : 'R$ ' : 2 }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Serviços Prestados</h3>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-condensed table-bordered">
+            <thead>
+              <tr>
+                <th width="5%"></th>
+                <th width="20%">Dentista</th>
+                <th width="20%">Serviço/Produto</th>
+                <th width="12%">Quantidade</th>
+                <th width="14%">Preço (R$)</th>
+                <th width="14%">Total do Item (R$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in vm.order.items">
+                <td colspan="" rowspan="" headers="" style="vertical-align:middle;" class="text-center">
+                  <a href="" title="" class="text-danger" ng-click="vm.removeItem(item)">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </a>
+                </td>
+                <td colspan="" rowspan="" headers="">
+                  <select class="form-control" ng-model="item.account_id" required>
+                    <option ng-value="null" disabled>&#8212;Selecione um Dentista&#8212;</option>
+                    <option ng-repeat="option in vm.doctor_list" ng-value="option.id">
+                      {{ option.full_name }}
+                    </option>
+                  </select>
+                </td>
+                <td colspan="" rowspan="" headers="">
+                  <select ng-if="item.services.length" class="form-control" ng-model="item.service_id" ng-change="vm.changeService(item)" required>
+                    <option ng-value="null" disabled>&#8212;Selecione um serviço&#8212;</option>
+                    <option ng-repeat="option in item.services" ng-value="option.id">
+                      {{ option.title }}
+                    </option>
+                  </select>
+                  <select ng-if="item.products.length" class="form-control" ng-model="item.product_id" ng-change="vm.changeProduct(item)" required>
+                    <option ng-value="null" disabled>&#8212;Selecione um produto&#8212;</option>
+                    <option ng-repeat="option in item.products" ng-value="option.id">
+                      {{ option.title }}
+                    </option>
+                  </select>
+                </td>
+                <td colspan="" rowspan="" headers="">
+                  <input type="number" ng-model="item.quantity" class="form-control" min="1" max="99" string-to-number ng-change="vm.updateItemTotalAmount(item)"/>
+                </td>
+                <td colspan="" rowspan="" headers="">
+                  <input type="text" ng-model="item.price" class="form-control" ui-money-mask="2" ng-change="vm.updateItemTotalAmount(item)" ng-disabled="item.price < 0.01"/>
+                </td>
+                <td colspan="" rowspan="" headers="">
+                  <input type="text" ng-model="item.total_cost" class="form-control" ui-money-mask="2" ng-disabled="true"/>
+                </td>
+              </tr>
+              <tr ng-if="!vm.order.items.length">
+                <td colspan="7" class="text-center">
+                  <span>Nenhum item registrado nessa comanda</span>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th colspan="5" rowspan="" headers="" class="text-right" style="vertical-align: middle;">
+                  <span style="font-size: 1.2em;font-weight: normal;">Total da Comanda</span>
+                </th>
+                <th rowspan="" headers="" class="text-right">
+                  <span style="font-size: 1.2em;font-weight: normal;">{{ vm.order.total_amount | currency : 'R$ ' : 2 }}</span>
+                </th>
+              </tr>
+              <tr>
+                <th colspan="5" rowspan="" headers="" class="text-right" style="vertical-align: middle;">
+                  <span style="font-size: 1.5em;">Total à Pagar</span>
+                </th>
+                <th rowspan="" headers="" class="text-right">
+                  <span style="font-size: 1.5em;">{{ vm.order.total_pay | currency : 'R$ ' : 2 }}</span>
+                </th>
+              </tr>
+              <tr ng-if="!vm.order.closed">
+                <td colspan="7" rowspan="" headers="" class="text-left">
+                  <button ng-disabled="!vm.original_service_list.length" type="button" class="btn btn-success" ng-click="vm.addService()">
+                    <i class="fa fa-tag"></i> Adicionar Serviço
+                  </button>
+                  <button ng-disabled="!vm.original_product_list.length" type="button" class="btn btn-primary" ng-click="vm.addProduct()">
+                    <i class="fa fa-shopping-cart"></i> Adicionar Produto
+                  </button>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer text-right">
+    <button class="btn btn-default" type="button" ng-if="vm.order.closed" ng-click="$dismiss()">Voltar</button>
+    <button class="btn btn-default" type="button" ng-if="!vm.order.closed" ng-click="$dismiss()">Cancelar</button>
+    <button class="btn btn-primary" type="submit" ng-if="!vm.order.closed">Salvar</button>
+  </div>
+</form>

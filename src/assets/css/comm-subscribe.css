@@ -1,0 +1,172 @@
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: #ececec;
+
+  font-family: "proxima-nova", sans-serif;
+  color: #333;
+  font-size: 14px;
+}
+
+h1,h2,h3,h4,h5, label, strong {
+  color: #3a8585;
+}
+
+hr {
+  border-top: 2px solid #3a8585;
+}
+
+.container {
+  max-width: 960px;
+}
+
+#header {
+  position: relative;
+  height: 60px;
+  line-height: 60px;
+  background-color: #ececec;
+  border-bottom: solid 1px #ccc;
+}
+
+#header .logo {
+  max-height: 50px;
+}
+
+.panel-plan {
+  border-color: #ddd;
+  border-width: 2px;
+}
+
+.panel-plan .panel-heading {
+  background-color: #fff;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.panel-plan .panel-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #3a8585;
+}
+
+.panel-plan .list-features {
+  list-style: none;
+  margin: 15px 0px;
+}
+
+.panel-plan .list-features li {
+  font-size: .85em;
+  padding: 3px 0px;
+}
+
+.panel-plan .plan-price {
+  text-align: center;
+}
+
+.panel-plan.selected {
+  border-color: #3a8585;
+}
+
+.panel-plan.selected .btn {
+  color: #3a8585;
+  font-weight: bold;
+}
+
+.panel-plan .triangle-ribbon {
+  position: absolute;
+  top: 0;
+  left: 16px;
+  width: 60px;
+  height: 60px;
+  background-color: #3a8585;
+  color: #FCFDFE;
+  text-align: center;
+}
+
+.panel-plan .triangle-ribbon:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-style: solid;
+  border-width: 0 0 60px 60px;
+  border-color: transparent transparent #FCFDFE transparent;
+}
+
+.panel-plan .triangle-ribbon .triangle-ribbon-content {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  left: -2px;
+  width: 41px;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 10px;
+  margin-top: 7px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+
+#trpgwordpress, .paymentmethod {
+  display: none;
+}
+
+.onoffswitch {
+  position: relative; width: 90px;
+  margin: 0px auto;
+  -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+  display: none;
+}
+.onoffswitch-label {
+  display: block; overflow: hidden; cursor: pointer;
+  border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+  display: block; width: 200%; margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+  font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+  box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+  content: "SIM";
+  padding-left: 10px;
+  background-color: #3a8585; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+  content: "NÂO";
+  padding-right: 10px;
+  background-color: #EEEEEE; color: #999999;
+  text-align: right;
+}
+.onoffswitch-switch {
+  display: block; width: 18px; margin: 6px;
+  background: #FFFFFF;
+  position: absolute; top: 0; bottom: 0;
+  right: 56px;
+  border: 2px solid #999999; border-radius: 20px;
+  transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; 
+}
+
+.modal .modal-body {
+  padding: 50px;
+}
+
+.modal .modal-body img {
+  max-width: 100%;
+}

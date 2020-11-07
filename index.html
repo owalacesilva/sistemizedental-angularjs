@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt" device-detector>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DEV - Sistemize Dental</title>
+
+    <meta name="account_page_path" content="//localhost:3000/d/">
+    <meta name="sign_up_path" content="//localhost:3000/accounts/sign_up/">
+    <meta name="forgot_password_path" content="//localhost:3000/accounts/password/new/">
+    <meta name="account_confirmation_path" content="//localhost:3000/accounts/confirmation/new/">
+    <meta name="private_policy_path" content="//localhost:3000/politica-privacidade/">
+    <meta name="terms_path" content="//localhost:3000/termos-uso/">
+
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#3a8585">
+    <meta name="apple-mobile-web-app-title" content="Sistemize Dental">
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="shortcut icon" type="image/x-icon" href="src/assets/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="src/assets/css/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="src/assets/css/font-proxima-nova.css">
+    <link rel="stylesheet" type="text/css" href="src/assets/css/preloader.css">
+  </head>
+  <body class="no-s">
+
+    <!-- PRELOADER -->
+    <div class="preloader text-center" ng-cloak>
+      <div class="display-table-cell align-middle">
+        <div class="text-center">
+          <img src="assets/img/icon-logo-horizontal.svg" alt="Sistemize Dental" style="max-width: 220px;">
+        </div>
+        <div id="fountainTextG">
+          <hr style="border-width: 2px;border-color: #ddd;">
+          <div id="fountainTextG_1" class="fountainTextG">C</div>
+          <div id="fountainTextG_2" class="fountainTextG">a</div>
+          <div id="fountainTextG_3" class="fountainTextG">r</div>
+          <div id="fountainTextG_4" class="fountainTextG">r</div>
+          <div id="fountainTextG_5" class="fountainTextG">e</div>
+          <div id="fountainTextG_6" class="fountainTextG">g</div>
+          <div id="fountainTextG_7" class="fountainTextG">a</div>
+          <div id="fountainTextG_8" class="fountainTextG">n</div>
+          <div id="fountainTextG_9" class="fountainTextG">d</div>
+          <div id="fountainTextG_10" class="fountainTextG">o</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="full-body" ui-view></div>
+    <script type="text/javascript">
+      /* TODO: review service worker update file caches */
+      /*if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }, function(err) {
+            // registration failed :(
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }*/
+    </script>
+
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="src/assets/libs/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="node_modules/moment/min/moment-with-locales.min.js"></script>
+
+    <script type="text/javascript" src="dist/styles.bundle-development.js"></script>
+    <script type="text/javascript" src="dist/app.bundle-development.js"></script>
+  </body>
+</html>

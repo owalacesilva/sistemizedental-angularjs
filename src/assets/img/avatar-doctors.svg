@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100px" height="100px" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>- placeholder-multiplos-dr</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <ellipse id="path-1" cx="16.7239074" cy="16.6850146" rx="16.7239074" ry="16.6850146"></ellipse>
+        <ellipse id="path-3" cx="34.7857273" cy="20.0220175" rx="34.7857273" ry="20.0220175"></ellipse>
+        <ellipse id="path-5" cx="16.7239074" cy="16.6850146" rx="16.7239074" ry="16.6850146"></ellipse>
+        <ellipse id="path-7" cx="34.7857273" cy="20.0220175" rx="34.7857273" ry="20.0220175"></ellipse>
+        <ellipse id="path-9" cx="20.5465148" cy="20.5854076" rx="20.5465148" ry="20.5854076"></ellipse>
+        <ellipse id="path-11" cx="42.7367507" cy="24.7024891" rx="42.7367507" ry="24.7024891"></ellipse>
+    </defs>
+    <g id="elementos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="--placeholder-multiplos-dr" sketch:type="MSArtboardGroup">
+            <rect id="Rectangle-73-Copy" fill="#8C8883" sketch:type="MSShapeGroup" x="0" y="0" width="100" height="100"></rect>
+            <g id="cabeca-+-busto" sketch:type="MSLayerGroup" transform="translate(45.000000, 19.000000)">
+                <g id="cabeca" transform="translate(18.276093, 0.458167)">
+                    <mask id="mask-2" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#BAB6AF" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
+                    <ellipse id="cabeca-copy" fill="#D8D3CC" sketch:type="MSShapeGroup" mask="url(#mask-2)" cx="20.0686888" cy="13.3480117" rx="16.7239074" ry="16.6850146"></ellipse>
+                </g>
+                <g id="busto" transform="translate(0.214273, 36.497798)">
+                    <mask id="mask-4" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" sketch:type="MSShapeGroup" xlink:href="#path-3"></use>
+                    <g id="Path-278-Copy-+-Path-278-Copy-2" mask="url(#mask-4)" sketch:type="MSShapeGroup">
+                        <g transform="translate(18.730776, -2.002202)">
+                            <path d="M12.3954852,2.64255844 L8.87061859,12.4023085 L10.8873173,14.7819216 L6.39570818,27.5668982 L2.957508,29.2043609 L3.60508102,1.70416314 L12.3954852,2.64255844 Z" id="Path-278-Copy" opacity="0.8" fill="#BAB6AF" transform="translate(7.676497, 15.454262) scale(-1, 1) rotate(10.000000) translate(-7.676497, -15.454262) "></path>
+                            <path d="M13.7333978,1.97515786 L9.93117081,12.3481948 L12.2252299,14.1145211 L7.73362077,26.8994976 L4.29542059,28.5369603 L4.94299361,1.03676255 L13.7333978,1.97515786 Z" id="Path-278-Copy-3" fill="#EDEAE4" transform="translate(9.014409, 14.786861) scale(-1, 1) rotate(10.000000) translate(-9.014409, -14.786861) "></path>
+                            <path d="M9.34709636,0.722148287 L24.2313739,0.845982379 L17.454925,27.6717056 L15.1384026,27.177021 L9.34709636,0.722148287 Z" id="Path-280" fill="#D8D3CC"></path>
+                            <path d="M28.4834379,1.97515786 L24.6812108,12.3481948 L26.9752699,14.1145211 L22.4836608,26.8994976 L19.0454606,28.5369603 L19.6930336,1.03676255 L28.4834379,1.97515786 Z" id="Path-278-Copy-4" fill="#EDEAE4" transform="translate(23.764449, 14.786861) rotate(10.000000) translate(-23.764449, -14.786861) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g id="cabeca-+-busto-copy-2" sketch:type="MSLayerGroup" transform="translate(-15.000000, 19.000000)">
+                <g id="cabeca" transform="translate(18.276093, 0.458167)">
+                    <mask id="mask-6" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use id="Mask" fill="#BAB6AF" sketch:type="MSShapeGroup" xlink:href="#path-5"></use>
+                    <ellipse id="cabeca-copy" fill="#D8D3CC" sketch:type="MSShapeGroup" mask="url(#mask-6)" cx="20.0686888" cy="13.3480117" rx="16.7239074" ry="16.6850146"></ellipse>
+                </g>
+                <g id="busto" transform="translate(0.214273, 36.497798)">
+                    <mask id="mask-8" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-7"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" sketch:type="MSShapeGroup" xlink:href="#path-7"></use>
+                    <g id="Path-278-Copy-+-Path-278-Copy-2" mask="url(#mask-8)" sketch:type="MSShapeGroup">
+                        <g transform="translate(18.730776, -2.002202)">
+                            <path d="M12.3954852,2.64255844 L8.87061859,12.4023085 L10.8873173,14.7819216 L6.39570818,27.5668982 L2.957508,29.2043609 L3.60508102,1.70416314 L12.3954852,2.64255844 Z" id="Path-278-Copy" opacity="0.8" fill="#BAB6AF" transform="translate(7.676497, 15.454262) scale(-1, 1) rotate(10.000000) translate(-7.676497, -15.454262) "></path>
+                            <path d="M13.7333978,1.97515786 L9.93117081,12.3481948 L12.2252299,14.1145211 L7.73362077,26.8994976 L4.29542059,28.5369603 L4.94299361,1.03676255 L13.7333978,1.97515786 Z" id="Path-278-Copy-3" fill="#EDEAE4" transform="translate(9.014409, 14.786861) scale(-1, 1) rotate(10.000000) translate(-9.014409, -14.786861) "></path>
+                            <path d="M9.34709636,0.722148287 L24.2313739,0.845982379 L17.454925,27.6717056 L15.1384026,27.177021 L9.34709636,0.722148287 Z" id="Path-280" fill="#D8D3CC"></path>
+                            <path d="M28.4834379,1.97515786 L24.6812108,12.3481948 L26.9752699,14.1145211 L22.4836608,26.8994976 L19.0454606,28.5369603 L19.6930336,1.03676255 L28.4834379,1.97515786 Z" id="Path-278-Copy-4" fill="#EDEAE4" transform="translate(23.764449, 14.786861) rotate(10.000000) translate(-23.764449, -14.786861) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g id="cabeca-+-busto-copy" sketch:type="MSLayerGroup" transform="translate(7.000000, 26.000000)">
+                <g id="cabeca" transform="translate(22.453485, 0.565271)">
+                    <mask id="mask-10" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-9"></use>
+                    </mask>
+                    <use id="Mask" fill="#BAB6AF" sketch:type="MSShapeGroup" xlink:href="#path-9"></use>
+                    <ellipse id="cabeca-copy" fill="#D8D3CC" sketch:type="MSShapeGroup" mask="url(#mask-10)" cx="24.6558177" cy="16.4683261" rx="20.5465148" ry="20.5854076"></ellipse>
+                </g>
+                <g id="busto" transform="translate(0.263249, 45.029751)">
+                    <mask id="mask-12" sketch:name="Mask" fill="white">
+                        <use xlink:href="#path-11"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" sketch:type="MSShapeGroup" xlink:href="#path-11"></use>
+                    <g id="Path-278-Copy-+-Path-278-Copy-2" mask="url(#mask-12)" sketch:type="MSShapeGroup">
+                        <g transform="translate(23.012097, -2.470249)">
+                            <path d="M15.228739,3.26029938 L10.8981886,15.3015495 L13.3758469,18.2374358 L7.85758434,34.0111082 L3.63350983,36.0313543 L4.42909954,2.10253893 L15.228739,3.26029938 Z" id="Path-278-Copy" opacity="0.8" fill="#BAB6AF" transform="translate(9.431124, 19.066947) scale(-1, 1) rotate(10.000000) translate(-9.431124, -19.066947) "></path>
+                            <path d="M16.8724602,2.43688307 L12.2011527,15.2347857 L15.0195681,17.4140195 L9.50130552,33.1876919 L5.27723101,35.207938 L6.07282072,1.27912263 L16.8724602,2.43688307 Z" id="Path-278-Copy-3" fill="#EDEAE4" transform="translate(11.074846, 18.243530) scale(-1, 1) rotate(10.000000) translate(-11.074846, -18.243530) "></path>
+                            <path d="M11.4835755,0.890962172 L29.7699737,1.04374449 L21.4446222,34.140416 L18.5986089,33.5300908 L11.4835755,0.890962172 Z" id="Path-280" fill="#D8D3CC"></path>
+                            <path d="M34.9939379,2.43688307 L30.3226305,15.2347857 L33.1410459,17.4140195 L27.6227833,33.1876919 L23.3987088,35.207938 L24.1942985,1.27912263 L34.9939379,2.43688307 Z" id="Path-278-Copy-4" fill="#EDEAE4" transform="translate(29.196323, 18.243530) rotate(10.000000) translate(-29.196323, -18.243530) "></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

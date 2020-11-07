@@ -1,0 +1,11 @@
+<script type ="text/ng-template" id="tour/tour.tpl.html">
+  <div class="tour-tip">
+    <span class="tour-arrow tt-{{ ttPlacement }}" ng-hide="centered"></span>
+    <div class="tour-content-wrapper">
+      <p ng-bind="ttContent"></p>
+      <a ng-click="closeTour()" class="btn btn-link">Pular Tour</a>
+      <a ng-click="proceed()" ng-bind="ttNextLabel" class="btn btn-success btn-sm pull-right"></a>
+      <a ng-click="closeTour()" class="tour-close-tip">×</a>
+    </div>
+  </div>
+</script>

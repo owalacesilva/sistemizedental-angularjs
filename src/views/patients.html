@@ -1,0 +1,103 @@
+<script type ="text/ng-template" id="patients_edit_appointments.html">
+  <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover display" cellspacing="0" width="100%"></table>
+</script>
+<script type ="text/ng-template" id="patients_edit_commands.html">
+  <table datatable="" dt-options="vm.dtOptions" dt-columns="vm.dtColumns" dt-instance="vm.dtInstance" class="table table-hover display" cellspacing="0" width="100%"></table>
+</script>
+<script type ="text/ng-template" id="patients_anamnese.html">
+  <div class="row">
+    <div class="col-lg-12">
+      <ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Pacientes</a></li>
+        <li class="active"><span>Ficha de Anamnese</span></li>
+      </ol>
+      <div class="clearfix">
+        <h1 class="pull-left">Nome do paciente</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="main-box">
+        <div class="main-box-body clearfix">
+          <br>
+          <form id="form" name="form" role="form" class="form" ng-submit="vm.submit(form.$valid)" novalidate>
+            <fieldset>
+              <legend>Informações do pacientes</legend>
+              <div class="form-group" ng-class="{ 'has-error': form.fullname.$invalid && (form.fullname.$dirty || form.$submitted) }">
+                <label for="fullname" class="control-label">Nome do paciente</label>
+                <input type="text" class="form-control" name="fullname" id="fullname" ng-model="vm.patient.fullname" required/>
+                <div ng-messages="form.fullname.$error" role="alert" class="help-block" ng-if="(form.fullname.$dirty || form.$submitted)">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && (form.email.$dirty || form.$submitted) }">
+                <label for="email" class="control-label">E-mail</label>
+                <input type="email" class="form-control" name="email" id="email" ng-model="vm.patient.email" required/>
+                <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="(form.email.$dirty || form.$submitted)">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form.telephone.$invalid && (form.telephone.$dirty || form.$submitted) }">
+                <label for="telephone" class="control-label">Telefone</label>
+                <input type="text" class="form-control" name="telephone" id="telephone" ng-model="vm.patient.telephone" ui-mask="(99) ?99999-9999" required/>
+                <div ng-messages="form.telephone.$error" role="alert" class="help-block" ng-if="(form.telephone.$dirty || form.$submitted)">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.birthdate.$invalid && (form.birthdate.$dirty || form.$submitted) }">
+                    <label for="birthdate" class="control-label">Data de Nascimento</label>
+                    <input type="text" class="form-control" id="birthdate" name="birthdate" ng-model="vm.patient.birthdate" ui-mask="99/99/9999" required>
+                    <div ng-messages="form.birthdate.$error" role="alert" class="help-block" ng-if="(form.birthdate.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group" ng-class="{ 'has-error': form.gender.$invalid && (form.gender.$dirty || form.$submitted) }">
+                    <label for="gender" class="control-label">Sexo</label>
+                    <select id="gender" name="gender" class="form-control" ng-model="vm.patient.gender"
+                      ng-init="vm.patient.gender = (vm.patient.gender || vm.genders[0].id)" 
+                        ng-options="option.id as option.name for option in vm.genders" required></select>
+                    <div ng-messages="form.gender.$error" role="alert" class="help-block" ng-if="(form.gender.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Informações de acesso</legend>
+              <div class="form-group">
+                <div class='row'>
+                  <div class="col-lg-6">
+                    <div class="form-group" ng-class="{ 'has-error': form.password.$invalid && (form.password.$dirty || form.$submitted) }">
+                      <label for="password" class="control-label">Senha</label>
+                      <input type="password" class="form-control" id="password" name="password" ng-model="vm.patient.password" required>
+                      <div ng-messages="form.password.$error" role="alert" class="help-block" ng-if="(form.password.$dirty || form.$submitted)">
+                        <small ng-message="required">Campo obrigatório</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label for="cpassword" class="control-label">Digite novamente a senha</label>
+                      <input type="password" class="form-control" id="cpassword" name="cpassword">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group text-right">
+              <button type="submit" class="btn btn-success">Salvar paciente</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>

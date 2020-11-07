@@ -1,0 +1,196 @@
+<script type ="text/ng-template" id="doctors_edit.html">
+  <div class="container-form p-h-xs p-v-xs">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2 class="panel-title">Cadastro novo Dentista</h2>
+        <span>Formulário para cadastro de novos Dentistas</span>
+      </div>
+      <div class="panel-body">
+        <form name="form" role="form" class="form" ng-submit="vm.submit(form.$valid)" novalidate>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <fieldset>
+                <legend>
+                  <i class="fa fa-usd fa-mc fa-fw"></i> Informações do Dentista
+                </legend>
+                <p>Informações pertinentes ao cadastro do Dentista</p>
+                <div class="form-group" ng-class="{ 'has-error': form.first_name.$invalid && form.$submitted }">
+                  <label for="first_name" class="control-label">Nome do Dentista</label>
+                  <input type="text" class="form-control" name="first_name" id="first_name" ng-model="vm.doctor.first_name" required/>
+                  <div ng-messages="form.first_name.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.email.$invalid && form.$submitted }">
+                  <label for="email" class="control-label">E-mail para contatos</label>
+                  <input type="email" class="form-control" name="email" id="email" ng-model="vm.doctor.email" required/>
+                  <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                    <span ng-message="email">E-mail inválido</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.telephone.$invalid && form.$submitted }">
+                  <label for="telephone" class="control-label">Telefone para contatos</label>
+                  <input type="text" class="form-control" name="telephone" id="telephone" ng-model="vm.doctor.telephone" ui-mask="(99) ?99999-9999" model-view-value="true" required/>
+                  <div ng-messages="form.telephone.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="birthdate" class="control-label">Data de Nascimento</label>
+                  <input type="text" class="form-control" id="birthdate" name="birthdate" ng-model="vm.doctor.birthdate" ui-mask="99/99/9999" model-view-value="true" />
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.gender.$invalid && form.$submitted }">
+                  <label for="gender" class="control-label">Sexo</label>
+                  <select id="gender" name="gender" class="form-control" ng-model="vm.doctor.gender"
+                    ng-init="vm.doctor.gender = (vm.doctor.gender || vm.genders[0].id)" 
+                      ng-options="option.id as option.name for option in vm.genders" required></select>
+                  <div ng-messages="form.gender.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                    <span ng-message="required">Campo obrigatório</span>
+                  </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.active.$invalid && form.$submitted }">
+                  <label for="telephone" class="control-label">Ativo</label><br/>
+                  <label class="radio-inline">
+                    <input type="radio" name="active" ng-model="vm.doctor.active" ng-value-true="'1'" value="1"> Sim
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="active" ng-model="vm.doctor.active" ng-value-false="'0'" value="0"> Não
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+              <fieldset>
+                <legend>
+                  <i class="fa fa-usd fa-mc fa-fw"></i> Configurar Expediente
+                </legend>
+                <p>Defina o expediente que o Dentista atendera seus pacientes</p>
+                <div class="form-group">
+                  <label for="expedient" class="control-label">Expediente para esse Dentista</label>
+                  <div class="define-business-hours">
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_sunday == '1', 'label-danger': vm.doctor.work_sunday == '0' }">
+                        <span>dom</span>
+                        <input type="checkbox" name="work_sunday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_sunday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.sunday_start_time" ng-if="vm.doctor.work_sunday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.sunday_end_time" ng-if="vm.doctor.work_sunday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_monday == '1', 'label-danger': vm.doctor.work_monday == '0' }">
+                        <span>seg</span>
+                        <input type="checkbox" name="work_monday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_monday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.monday_start_time" ng-if="vm.doctor.work_monday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.monday_end_time" ng-if="vm.doctor.work_monday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_tuesday == '1', 'label-danger': vm.doctor.work_tuesday == '0' }">
+                        <span>ter</span>
+                        <input type="checkbox" name="work_tuesday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_tuesday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.tuesday_start_time" ng-if="vm.doctor.work_tuesday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.tuesday_end_time" ng-if="vm.doctor.work_tuesday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_wednesday == '1', 'label-danger': vm.doctor.work_wednesday == '0' }">
+                        <span>qua</span>
+                        <input type="checkbox" name="work_wednesday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_wednesday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.wednesday_start_time" ng-if="vm.doctor.work_wednesday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.wednesday_end_time" ng-if="vm.doctor.work_wednesday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_thursday == '1', 'label-danger': vm.doctor.work_thursday == '0' }">
+                        <span>qui</span>
+                        <input type="checkbox" name="work_thursday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_thursday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.thursday_start_time" ng-if="vm.doctor.work_thursday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.thursday_end_time" ng-if="vm.doctor.work_thursday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_friday == '1', 'label-danger': vm.doctor.work_friday == '0' }">
+                        <span>sex</span>
+                        <input type="checkbox" name="work_friday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_friday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.friday_start_time" ng-if="vm.doctor.work_friday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.friday_end_time" ng-if="vm.doctor.work_friday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="day_container">
+                      <label class="label" ng-class="{ 'label-success': vm.doctor.work_saturday == '1', 'label-danger': vm.doctor.work_saturday == '0' }">
+                        <span>sab</span>
+                        <input type="checkbox" name="work_saturday" class="hide" ng-true-value="'1'" ng-false-value="'0'" ng-model="vm.doctor.work_saturday" />
+                      </label>
+                      <select class="form-control" ng-model="vm.doctor.saturday_start_time" ng-if="vm.doctor.work_saturday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                      <select class="form-control" ng-model="vm.doctor.saturday_end_time" ng-if="vm.doctor.work_saturday == '1'">
+                        <option ng-repeat="option in vm.rangeHours" value="{{ option.value }}">
+                          {{ option.label }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <div class="form-group text-right">
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</script>

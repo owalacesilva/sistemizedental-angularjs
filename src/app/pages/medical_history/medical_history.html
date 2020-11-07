@@ -1,0 +1,77 @@
+<div class="panel">
+  <div class="panel-body">
+    <h3>
+      <i class="fa fa-address-book-o fa-mc fa-fw"></i> {{vm.appointment.client.full_name}}
+    </h3>
+    <ul class="list-unstyled list-inline text-center no-s">
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Nº Consulta</h4>
+        <span ng-bind="vm.appointment.id"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Dentista</h4>
+        <span ng-bind="vm.appointment.account.full_name"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Data do agendamento</h4>
+        <span ng-bind="vm.appointment.created_at"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Data da Consulta</h4>
+        <span ng-bind="vm.appointment.date_at"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Hora Inicial</h4>
+        <span ng-bind="vm.appointment.start_time"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Hora Final</h4>
+        <span ng-bind="vm.appointment.end_time"></span>
+      </li>
+      <li class="p-h-md">
+        <h4 class="m-t-xxs m-b-xxs">Tempo da Consulta</h4>
+        <span ng-bind="vm.appointment.duration_time"></span>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="p-h-xs p-v-xs">
+  <uib-tabset active="active">
+    <uib-tab index="1">
+      <uib-tab-heading>
+        <span class="hidden-sm hidden-xs">
+          <i class="fa fa-camera fa-mc fa-fw"></i> Fotos do procedimento
+        </span>
+        <i class="fa fa-camera fa-mc fa-fw hidden-lg hidden-md"></i>
+      </uib-tab-heading>
+      <div ui-view="attachments"></div>
+    </uib-tab>
+    <uib-tab index="2">
+      <uib-tab-heading>
+        <span class="hidden-sm hidden-xs">
+          <i class="fa fa-check-square-o fa-mc fa-fw"></i> Ficha de Anamnese
+        </span>
+        <i class="fa fa-check-square-o fa-mc fa-fw hidden-lg hidden-md"></i>
+      </uib-tab-heading>
+      <div ui-view="anamnesis"></div>
+    </uib-tab>
+    <uib-tab index="3">
+      <uib-tab-heading>
+        <span class="hidden-sm hidden-xs">
+          <i class="fa fa-address-book-o fa-mc fa-fw"></i> Informações do paciente
+        </span>
+        <i class="fa fa-address-book-o fa-mc fa-fw hidden-lg hidden-md"></i>
+      </uib-tab-heading>
+      <div ui-view="patient"></div>
+    </uib-tab>
+    <uib-tab index="4">
+      <uib-tab-heading>
+        <span class="hidden-sm hidden-xs">
+          <i class="fa fa-list fa-mc fa-fw"></i> Consultas Anteriores
+        </span>
+        <i class="fa fa-list fa-mc fa-fw hidden-lg hidden-md"></i>
+      </uib-tab-heading>
+      <div ui-view="records"></div>
+    </uib-tab>
+  </uib-tabset>
+</div>

@@ -1,0 +1,16 @@
+<div class="p-h-xs m-t-xs">
+  <uib-tabset active="0" justified="false">
+    <uib-tab index="0" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-wrench fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Serviços</span>
+      </uib-tab-heading>
+      <div ui-view="services"></div>
+    </uib-tab>
+    <uib-tab index="1" classes="menu-tab" select="selected()">
+      <uib-tab-heading>
+        <i class="fa fa-cubes fa-lg fa-fw" aria-hidden="true"></i> <span class="hidden-sm hidden-xs">Produtos</span>
+      </uib-tab-heading>
+      <div ui-view="products"></div>
+    </uib-tab>
+  </uib-tabset>
+</div>

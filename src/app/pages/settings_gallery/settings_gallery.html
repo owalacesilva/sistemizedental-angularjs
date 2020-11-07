@@ -1,0 +1,58 @@
+<div class="panel">
+  <div class="panel-body">
+    <form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+      <div class="row">
+        <div class="col-lg-6">
+          <fieldset>
+            <legend>Imagem de Capa</legend>
+            <div class="form-group" >
+              <div class="m-b-sm" style="display:flex;align-items:center;justify-content:center;overflow:hidden;width: 320px;height:160px;border: solid 2px #aaa;text-align: center;">
+                <img ngf-thumbnail="vm.account.banner_url || 'https://sistemizedental.s3.sa-east-1.amazonaws.com/avatars/avatar_1.jpg'" alt="Sistemize Dental" style="max-width:100%;max-height:100%;" />
+              </div>
+              <button 
+                type="button"
+                class="btn btn-default btn-sm"
+                ngf-select="vm.updaloadBanner($file)"
+                ngf-accept="'image/*'"
+                ngf-pattern="'image/*'"
+                ngf-max-size="20MB" 
+                ngf-min-height="100">
+                <strong>ALTERAR FOTO DE CAPA</strong>
+              </button>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+      <fieldset>
+        <legend>Galeria de Fotos</legend>
+        <div>
+          <ul class="list-styled list-inline">
+            <li class="text-center form-group" ng-repeat="url in vm.account.images_url track by $index">
+              <div class="m-b-sm" style="display:flex;align-items:center;justify-content:center;overflow: hidden;width:160px;height:160px;border: solid 2px #aaa;text-align: center;">
+                <img ngf-thumbnail="url" style="max-width:100%;max-height:100%;" />
+              </div>
+              <button type="button" class="btn btn-danger btn-sm">
+                <strong>DELETAR FOTO</strong>
+              </button>
+            </li>
+            <li class="text-center form-group" ng-if="vm.account.images_url.length < 10">
+              <div class="m-b-sm">
+                <img width="160" height="160" />
+              </div>
+              <button 
+                type="button"
+                class="btn btn-default btn-sm"
+                ngf-select="vm.uploadImage($file)"
+                ngf-accept="'image/*'"
+                ngf-pattern="'image/*'"
+                ngf-max-size="20MB" 
+                ngf-min-height="100">
+                <strong>ADICIONAR FOTO</strong>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

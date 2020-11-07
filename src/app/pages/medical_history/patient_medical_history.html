@@ -1,0 +1,123 @@
+<div class="panel">
+  <div class="panel-body">
+    <form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-6">              
+            <fieldset>
+              <legend>Dados do paciente</legend>
+              <div class="form-group" ng-class="{ 'has-error': form.first_name.$invalid && (form.first_name.$dirty || form.$submitted) }">
+                <label for="first_name" class="control-label">Nome do paciente</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" ng-model="vm.patient.first_name" required/>
+                <div ng-messages="form.first_name.$error" role="alert" class="help-block" ng-if="(form.first_name.$dirty || form.$submitted)">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-7">                      
+                  <div class="form-group" ng-class="{ 'has-error': form.$submitted && form.email.$invalid }">
+                    <label for="email" class="control-label">E-mail</label>
+                    <input type="email" class="form-control" name="email" id="email" ng-model="vm.patient.email" required/>
+                    <div ng-messages="form.email.$error" role="alert" class="help-block" ng-if="form.$submitted">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">                      
+                  <div class="form-group" ng-class="{ 'has-error': form.phone_number.$invalid && (form.phone_number.$dirty || form.$submitted) }">
+                    <label for="phone_number" class="control-label">Telefone</label>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" ng-model="vm.patient.phone_number" ui-mask="(99) ?99999-9999" model-view-value="true" required/>
+                    <div ng-messages="form.phone_number.$error" role="alert" class="help-block" ng-if="(form.phone_number.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-7">
+                  <div class="form-group" ng-class="{ 'has-error': form.birthdate.$invalid && (form.birthdate.$dirty || form.$submitted) }">
+                    <label for="birthdate" class="control-label">Data de Nascimento</label>
+                    <input type="text" class="form-control" id="birthdate" name="birthdate" ng-model="vm.patient.birthdate" ui-mask="99/99/9999" model-view-value="true" required>
+                    <div ng-messages="form.birthdate.$error" role="alert" class="help-block" ng-if="(form.birthdate.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="form-group" ng-class="{ 'has-error': form.gender.$invalid && (form.gender.$dirty || form.$submitted) }">
+                    <label for="gender" class="control-label">Sexo</label>
+                    <select id="gender" name="gender" class="form-control" ng-model="vm.patient.gender">
+                      <option value>Selecione o sexo do paciente</option>
+                      <option value="M">Masculino</option>}
+                      <option value="F">Feminino</option>
+                    </select>
+                    <div ng-messages="form.gender.$error" role="alert" class="help-block" ng-if="(form.gender.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-lg-6">              
+            <fieldset>
+              <legend>Endereço do paciente</legend>
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group" ng-class="{ 'has-error': form.postal_code.$invalid && (form.postal_code.$dirty || form.$submitted) }">
+                    <label for="postal_code" class="control-label">CEP</label>
+                    <input type="text" class="form-control" name="postal_code" id="postal_code" ng-model="vm.patient.postal_code" ui-mask="99999-999" ng-blur="vm.searchAddress()" required/>
+                    <div ng-messages="form.postal_code.$error" role="alert" class="help-block" ng-if="(form.postal_code.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error': form.street_address.$invalid && (form.street_address.$dirty || form.$submitted) }">
+                <label for="text" class="control-label">Endereço</label>
+                <input type="text" class="form-control" name="street_address" id="street_address" ng-model="vm.patient.street_address" required/>
+                <div ng-messages="form.street_address.$error" role="alert" class="help-block" ng-if="(form.street_address.$dirty || form.$submitted)">
+                  <small ng-message="required">Campo obrigatório</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-5">                      
+                  <div class="form-group" ng-class="{ 'has-error': form.district.$invalid && (form.district.$dirty || form.$submitted) }">
+                    <label for="district" class="control-label">Bairro</label>
+                    <input type="text" class="form-control" name="district" id="district" ng-model="vm.patient.district" required/>
+                    <div ng-messages="form.district.$error" role="alert" class="help-block" ng-if="(form.district.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="form-group" ng-class="{ 'has-error': form.city.$invalid && (form.city.$dirty || form.$submitted) }">
+                    <label for="city" class="control-label">Cidade</label>
+                    <input type="text" class="form-control" id="city" name="city" ng-model="vm.patient.city" required>
+                    <div ng-messages="form.city.$error" role="alert" class="help-block" ng-if="(form.city.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-2"> 
+                  <div class="form-group" ng-class="{ 'has-error': form.state.$invalid && (form.state.$dirty || form.$submitted) }">
+                    <label for="state" class="control-label">Estado</label>
+                    <input type="text" class="form-control" id="state" name="state" ng-model="vm.patient.state" required>
+                    <div ng-messages="form.state.$error" role="alert" class="help-block" ng-if="(form.state.$dirty || form.$submitted)">
+                      <small ng-message="required">Campo obrigatório</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="col-lg-12">              
+            <div class="form-group text-right">
+              <button type="submit" class="btn btn-success">Atualizar dados</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

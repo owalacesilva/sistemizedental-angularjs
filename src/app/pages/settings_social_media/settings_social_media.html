@@ -1,0 +1,47 @@
+<div class="panel">
+  <div class="panel-body">
+    <form name="form" role="form" class="form" ng-submit="vm.submit(form)" novalidate>
+      <div class="row">
+        <div class="col-lg-6">
+          <fieldset>
+            <legend>Links para redes sociais</legend>
+            <div class="form-group">
+              <label for="link_website" class="control-label">Seu Site</label>
+              <input type="text" name="link_website" ng-model="vm.links['website']" class="form-control" placeholder="Exemplo: https://www.meusite.com"/>
+              <span>Insira o link do seu site pessoal para aparecer na sua página de cliente</span>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="link_facebook" class="control-label">
+                <i class="fa fa-facebook fa-fw"></i> Fanpage
+              </label>
+              <input type="text" name="link_facebook" ng-model="vm.links['facebook']" class="form-control" placeholder="Exemplo: https://www.facebook.com/minhapagina"/>
+            </div>
+            <div class="form-group">
+              <label for="link_twitter" class="control-label">
+                <i class="fa fa-twitter fa-fw"></i> Twitter
+              </label>
+              <input type="text" name="link_twitter" ng-model="vm.links['twitter']" class="form-control" placeholder="Exemplo: https://www.twitter.com/minhapagina"/>
+            </div>
+            <div class="form-group">
+              <label for="link_youtube" class="control-label">
+                <i class="fa fa-youtube fa-fw"></i> Youtube
+              </label>
+              <input type="text" name="link_youtube" ng-model="vm.links['youtube']" class="form-control" placeholder="Exemplo: https://www.youtube.com/channel/minhapagina"/>
+            </div>
+            <div class="form-group">
+              <label for="link_instagram" class="control-label">
+                <i class="fa fa-instagram fa-fw"></i> Instagram
+              </label>
+              <input type="text" name="link_instagram" ng-model="vm.links['instagram']" class="form-control" placeholder="Exemplo: https://www.instagram.com/minhapagina"/>
+            </div>
+            <div class="form-group text-right">
+              <button type="submit" class="btn btn-primary">Atualizar</button>
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-lg-6"></div>
+      </div>
+    </form>
+  </div>
+</div>

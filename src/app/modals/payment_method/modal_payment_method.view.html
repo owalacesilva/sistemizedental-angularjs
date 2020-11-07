@@ -1,0 +1,81 @@
+<form name="form" role="form" class="form-horizontal" ng-submit="vm.onSubmit(form)" novalidate>
+  <div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">Fechar</button>
+    <h4 class="modal-title">Forma de Pagamento</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group" ng-class="{ 'has-error': form.title.$invalid && form.$submitted }">
+      <label for="title" class="col-lg-4 control-label">Forma de Pagamento:</label>
+      <div class="col-lg-6">      
+        <input type="text" class="form-control" name="title" id="title" ng-model="vm.payment_method.title" maxlength="36" required />
+        <div ng-messages="form.label.$error" role="alert" class="help-block" ng-if="form.title.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+        <b>
+          <small>(Ex: Visa Crédito, Redecard Débito, Cheque, Dinheiro)</small>
+        </b>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.fee.$invalid && form.$submitted }">
+      <label for="fee" class="col-lg-4 control-label">Taxa da Operadora:</label>
+      <div class="col-lg-3">
+        <input type="text" class="form-control" name="fee" ng-model="vm.payment_method.fee" ui-percentage-mask="2" ui-percentage-value required />
+        <div ng-messages="form.fee.$error" role="alert" class="help-block" ng-if="form.fee.$invalid && form.$submitted">
+          <small ng-message="required">Obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.release_deadline.$invalid && form.$submitted }">
+      <label for="release_deadline" class="col-lg-4 control-label">Prazo para Liberação:</label>
+      <div class="col-lg-3">      
+        <input type="number" class="form-control" name="release_deadline" ng-model="vm.payment_method.release_deadline" min="0" max="30" string-to-number required />
+        <small>0 dias representa pagamento à vista</small>
+        <div ng-messages="form.release_deadline.$error" role="alert" class="help-block" ng-if="form.release_deadline.$invalid && form.$submitted">
+          <small ng-message="required">Obrigatório</small>
+        </div>
+      </div>
+      <div class="col-lg-5 no-p-h m-t-xs">dias</div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.has_installments.$invalid && form.$submitted }">
+      <label for="has_installments" class="col-lg-4 control-label">Permitir Parcelamento ?</label>
+      <div class="col-lg-8">      
+        <label class="radio-inline">
+          <input type="radio" name="has_installments" ng-model="vm.payment_method.has_installments" ng-value="false"> Não
+       </label>
+        <label class="radio-inline">
+          <input type="radio" name="has_installments" ng-model="vm.payment_method.has_installments" ng-value="true"> Sim
+       </label>
+      </div>
+    </div>
+    <div class="form-group row" ng-class="{ 'has-error': form.installments_limit.$invalid && form.$submitted }" ng-if="vm.payment_method.has_installments">
+      <label class="col-sm-4 control-label">Número de Parcelas: </label>
+      <div class="col-sm-6">
+        <select class="form-control" name="installments_limit" ng-model="vm.payment_method.installments_limit" ng-required="vm.payment_method.has_installments">
+          <option ng-repeat="n in [].constructor(24) track by $index" ng-if="$index > 0" ng-value="$index">{{$index}} vezes</option>
+        </select>
+        <div ng-messages="form.installments_limit.$error" role="alert" class="help-block no-s" ng-if="form.installments_limit.$invalid && form.$submitted">
+          <small ng-message="required">Campo obrigatório</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{ 'has-error': form.blocked.$invalid && form.$submitted }">
+      <label for="blocked" class="col-lg-4 control-label">Ativo ?</label>
+      <div class="col-lg-8">
+        <div class="btn-group btn-group-sm" data-toggle="buttons">
+          <label class="radio-inline">
+            <input type="radio" name="blocked" ng-model="vm.payment_method.blocked" ng-value="true"> Não
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="blocked" ng-model="vm.payment_method.blocked" ng-value="false"> Sim
+          </label>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <div class="modal-footer text-left">
+    <button class="btn btn-success" type="submit">
+      <i class="fa fa-check fa-fw"></i> Salvar
+    </button>
+    <button class="btn btn-default" type="button" ng-click="$dismiss()">Cancelar</button>
+  </div>
+</form>

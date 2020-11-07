@@ -1,0 +1,296 @@
+<div id="app">
+  <header id="app-header">
+    <nav class="navbar navbar-default no-m">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a href="javascript:void(0);" class="navbar-brand hidden-md hidden-lg pull-right collapsed" data-toggle="collapse" data-target="#navbar-collapse-responsive" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <i class="fa fa-ellipsis-v fa-lg fa-va fa-fw"></i>
+          </a>
+          <a href="javascript:void(0);" class="navbar-brand navbar-brand-desktop hidden-sm hidden-xs">
+            <table width="100%"><tr><td class="text-center">
+              <img src="assets/img/icon-logo-horizontal.svg" alt="Logo" style="max-height: 40px;padding: 5px 0px;" class="logo">
+            </td></tr></table>
+          </a>
+          <a href="javascript:void(0);" class="navbar-brand hidden-md hidden-lg mobile-logo">
+            <table><tr><td>
+              <img src="assets/img/icon-logo-horizontal.svg" alt="Logo" style="max-height: 40px;padding: 7px 0px;" class="logo">
+            </td></tr></table>
+          </a>
+          <a href="javascript:void(0);" class="navbar-brand hidden-md hidden-lg page-toggle-sidebar">
+            <i class="fa fa-bars fa-lg fa-va fa-fw"></i>
+          </a>
+        </div>
+
+        <div id="navbar-collapse-responsive" class="collapse hidden-md hidden-lg">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a ui-sref="app.settings" data-toggle="collapse" data-target="#navbar-collapse-responsive">
+                <i class="fa fa-bullhorn fa-lg fa-fw" aria-hidden="true"></i> Divulgação no Portal
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.calendar" data-toggle="collapse" data-target="#navbar-collapse-responsive">
+                <i class="fa fa-calendar-o fa-lg fa-fw" aria-hidden="true"></i> Ir para Agenda
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.patients.list" data-toggle="collapse" data-target="#navbar-collapse-responsive">
+                <i class="fa fa-address-book-o fa-lg fa-fw" aria-hidden="true"></i> Meus Pacientes
+              </a>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a ng-click="vm.doLogout()">
+                <i class="fa fa-sign-out fa-lg fa-fw" aria-hidden="true"></i> Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <a href="javascript:;" class="navbar-brand page-toggle-sidebar" tutle="Esconder o menu">
+              <span class="sr-only">Esconder o menu</span>
+              <i class="fa fa-bars fa-fw"></i>&nbsp;<small>Menu</small>
+            </a>
+            <!-- Modo Offline -->
+            <li ng-if="$root.offline_mode.enabled">
+              <a href="javascript:void(0);" ng-click="vm.modalOfflineMode()" class="navbar-flag offline">
+                <i class="fa fa-exclamation-triangle fa-fw fa-lg" aria-hidden="true"></i>&nbsp;<span>Você está no Modo Offline</span>
+              </a>
+            </li>
+            <li ng-if="!$root.offline_mode.enabled">
+              <a href="javascript:void(0);">
+                <i class="fa fa-whatsapp fa-fw fa-lg" aria-hidden="true"></i> Dúvidas? (11) 96975-8589
+              </a>
+            </li>
+            <li ng-if="$root.sbs.trialing && !$root.offline_mode.enabled && $root.sbs.remaining_days >= 0">
+              <a href="javascript:void(0);" ng-click="vm.modalSubscription(true, true, true)" class="navbar-flag">
+                <i class="fa fa-hourglass-end fa-fw fa-lg" aria-hidden="true"></i>&nbsp;
+                <span ng-if="$root.sbs.remaining_days > 0">Restam {{ $root.sbs.remaining_days + 1 }} dias de testes Assine agora</span>
+                <span ng-if="$root.sbs.remaining_days == 0">Amanhã termina seu teste Assine agora</span>
+              </a>
+            </li>
+            <li ng-if="$root.sbs.trialing && !$root.offline_mode.enabled && $root.sbs.remaining_days < 0">
+              <a href="javascript:void(0);" ng-click="vm.modalSubscription(true, true, true)" class="navbar-flag offline">
+                <i class="fa fa-exclamation-triangle fa-fw fa-lg" aria-hidden="true"></i>&nbsp;<span>Seu periodo de teste chegou ao fim!</span>
+              </a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="featured">
+              <a ui-sref="app.settings" title="Mypage">
+                <i class="fa fa-bullhorn fa-lg fa-fw" aria-hidden="true"></i> Meu Site
+              </a>
+            </li>
+            <li class="featured">
+              <a ui-sref="app.marketplace.analytics" title="Marketplace">
+                <i class="fa fa-shopping-bag fa-lg fa-fw" aria-hidden="true"></i> Minha Loja
+              </a>
+            </li>
+            <li class="featured">
+              <a ng-click="vm.modalAppointment()">
+                <i class="fa fa-calendar fa-lg fa-fw" aria-hidden="true"></i> Marcar Consulta
+              </a>
+            </li>
+            <li class="featured">
+              <a ng-click="vm.modalOrder()">
+                <i class="fa fa-shopping-cart fa-lg fa-fw" aria-hidden="true"></i> Nova Venda
+              </a>
+            </li>
+            <li class="hide">
+              <a id="link-tutorials" href="javascript:void(0);" ui-sref="app.support" class="text-error font-bold" style="font-size: 1.2em;">
+                <i class="fa fa-question-circle fa-lg fa-fw" aria-hidden="true"></i> Tutoriais e Videos
+              </a>
+            </li>
+            <!-- Dropdown para aviso e notificações -->
+            <li class="dropdown dropdown-notifications hide">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="pe-7s-bell pe-lg pe-va" aria-hidden="true"></i> Avisos
+              </a>
+              <div class="dropdown-container">
+                <div class="dropdown-toolbar">
+                  <div class="dropdown-toolbar-actions">
+                    <a href="#">Marcar todas como lida</a>
+                  </div>
+                  <h3 class="dropdown-toolbar-title">Notifications (2)</h3>
+                </div>
+                <ul class="dropdown-menu">
+                  <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">Dave Lister</a> commented on <a href="#">DWARF-13 - Maintenance</a></strong>
+                        <p class="notification-desc">I totally dont wanna do it. Rimmer can do it.</p>
+
+                        <div class="notification-meta">
+                          <small class="timestamp">27. 11. 2015, 15:00</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification active">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">Nikola Tesla</a> resolved <a href="#">T-14 - Awesome stuff</a></strong>
+                        <p class="notification-desc">Resolution: Fixed, Work log: 4h</p>
+                        <div class="notification-meta">
+                          <small class="timestamp">27. 10. 2015, 08:00</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification">
+                    <div class="media">
+                      <div class="media-left">
+                        <div class="media-object">
+                          <img data-src="holder.js/50x50?bg=cccccc" class="img-circle" alt="50x50" data-holder-rendered="true" style="width: 50px; height: 50px;">
+                        </div>
+                      </div>
+                      <div class="media-body">
+                        <strong class="notification-title"><a href="#">James Bond</a> resolved <a href="#">B-007 - Desolve Spectre organization</a></strong>
+                        <div class="notification-meta">
+                          <small class="timestamp">1. 9. 2015, 08:00</small>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <div class="dropdown-footer text-center">
+                  <a href="#">Visualizar todas</a>
+                </div>
+              </div>
+            </li>
+            <li class="dropdown">
+              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 2px;top: 5px;">
+                <img src="assets/img/avatar-doc.svg" ng-src="{{ $root.avatar_url }}" class="img-circle" style="max-width: 40px;max-height: 40px;" alt="Sistemize Dental"> <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a ui-sref="app.appointments">
+                    <i class="fa fa-list fa-fw" aria-hidden="true"></i> Consultas
+                  </a>
+                </li>
+                <li>
+                  <a ui-sref="app.patients.list">
+                    <i class="fa fa-address-book-o fa-fw" aria-hidden="true"></i> Pacientes
+                  </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <a ng-click="vm.doLogout()">
+                    <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i> Sair
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="app-main">
+    <aside id="app-sidebar" class="sidebar webkit-scrollbar">
+      <ul class="list-unstyled menu-sidebar" accordion-menu>
+        <li class="text-center p-v-xs">
+          <img src="assets/img/avatar-doc.svg" ng-src="{{ $root.avatar_url }}" class="img-circle" width="70px" height="70px" alt="Sistemize Dental">
+        </li>
+        <li accordion-menu-item ui-sref-active="active">
+          <a id="panel" ui-sref="app.dashboard" title="Painel">
+            <i class="fa fa-home fa-mc fa-fw" aria-hidden="true"></i> <strong>Home</strong>
+            <label class="label-feature">novo</label>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('schedule')">
+          <a id="calendar" ui-sref="app.calendar" title="Minha Agenda">
+            <i class="fa fa-calendar fa-mc fa-fw" aria-hidden="true"></i> <strong>Minha Agenda</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('appointments')">
+          <a id="appointments" ui-sref="app.appointments" title="Consultas">
+            <i class="fa fa-list fa-mc fa-fw" aria-hidden="true"></i> <strong>Lista de Consultas</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('clients')">
+          <a id="patients" ui-sref="app.patients.list" title="Meus Pacientes">
+            <i class="fa fa-address-book-o fa-mc fa-fw" aria-hidden="true"></i> <strong>Meus Pacientes</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('orders')">
+          <a id="orders" ui-sref="app.orders" title="Ponto de Vendas">
+            <i class="fa fa-shopping-cart fa-mc fa-fw" aria-hidden="true"></i> <strong>Ponto de Vendas</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('transactions')">
+          <a id="financial" ui-sref="app.financial.transactions" title="Fluxo de Caixa">
+            <i class="fa fa-usd fa-mc fa-fw" aria-hidden="true"></i> <strong>Financeiro</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('products')">
+          <a id="resources" ui-sref="app.resources" title="Serviços e Produtos">
+            <i class="fa fa-wrench fa-mc fa-fw" aria-hidden="true"></i> <strong>Serviços e Produtos</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('doctors')">
+          <a id="doctors" ui-sref="app.doctors.list" title="Dentistas">
+            <i class="fa fa-user-md fa-mc fa-fw" aria-hidden="true"></i> <strong>Dentistas</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('settings')">
+          <a id="portal" ui-sref="app.settings" title="Divulgação no Portal">
+            <i class="fa fa-bullhorn fa-mc fa-fw" aria-hidden="true"></i> <strong>Divulgação no Portal</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('reviews')">
+          <a id="reviews-menuitem" ui-sref="app.page_settings" title="Avaliações">
+            <i class="fa fa-star fa-mc fa-fw" aria-hidden="true"></i> <strong>Avaliações Recebidas</strong>
+          </a>
+        </li>
+        <li accordion-menu-item ui-sref-active="active" ng-if="vm.getResource('marketplace')">
+          <a id="marketplace-menuitem" ui-sref="app.marketplace.analytics" title="Marketplace">
+            <i class="fa fa-shopping-bag fa-mc fa-fw" aria-hidden="true"></i> <strong>Minha Loja</strong>
+            <label class="label-feature">novo</label>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <div id="app-content" class="loading-bar-container" ui-view></div>
+  </main>
+
+  <toasty></toasty>
+</div>
+<tour step="currentStep" post-tour="tourEnded()" tour-complete="tourComplete()">
+  <virtual-step 
+    tourtip="Veja como o menu está organizado! Aqui você encontra todas as nossas funções e modulos. Análise todos os links do menu para se familiarizar e conhecer todas as funcionalidades." 
+    tourtip-element="#app-sidebar"
+    tourtip-placement="right"
+    tourtip-step="0">
+  </virtual-step>
+  <virtual-step 
+    tourtip="Caso tenha duvidas de como utilizar alguma ferramenta, confira nossos tutoriais e videos didaticos nesse link acima!" 
+    tourtip-element="#link-tutorials"
+    tourtip-placement="bottom"
+    tourtip-step="1">
+  </virtual-step>
+  <virtual-step 
+    tourtip="Se estiver fazendo alguma outra coisa e precisar acessar rápido sua agenda, utilize esse atalho que colocamos aqui, pensando nessa situação!" 
+    tourtip-element="#link-calendar"
+    tourtip-placement="bottom"
+    tourtip-next-label="Começar"
+    tourtip-step="2">
+  </virtual-step>
+</tour>
+
