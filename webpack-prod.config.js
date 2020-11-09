@@ -154,7 +154,7 @@ module.exports = {
   	app: appEntry
   },
   output: {
-    path: path.resolve(__dirname, 'dist'), // This ensure absolute path
+    path: path.resolve(__dirname, 'build'), // This ensure absolute path
     filename: `[name].bundle-${process.env.NODE_ENV}.js`
   },
 
@@ -186,7 +186,20 @@ module.exports = {
       { test: /\.less$/, use: [{ loader: "style-loader" }, { loader: "css-loader"  }, { loader: "less-loader" }] },
       { test: /\.png$/, use: [{ loader: 'url-loader?name=img/[name].[ext]&mimetype=image/png' }] },
       { test: /\.jpg/, use: [{ loader: 'url-loader?name=img/[name].[ext]&mimetype=image/jpg' }] },
-      { test: /\.html$/, use: [{ loader: 'ng-cache-loader?minimizeOptions=' + minimizeOptions + '&conservativeCollapse' }] }
+      { test: /\.html$/, use: [{ loader: 'ng-cache-loader?minimizeOptions=' + minimizeOptions + '&conservativeCollapse' }] },
+      {
+        test: /\.svg$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              generator: function (content) {
+                return svgToMiniDataURI(content.toString())
+              }
+            }
+          }
+        ],
+      }
     ]
   }
 };

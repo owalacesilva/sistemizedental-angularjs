@@ -121,7 +121,7 @@ module.exports = {
   	app: appEntry
   },
   output: {
-    path: path.resolve(__dirname, 'dist'), // This ensure absolute path
+    path: path.resolve(__dirname, 'build'), // This ensure absolute path
     filename: `[name].bundle-development.js`
   },
 
